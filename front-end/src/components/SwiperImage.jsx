@@ -13,7 +13,7 @@ export default function SwiperImage({ onImageClick }) {
     onImageClick(movie.bgImg);
   };
   return (
-    <div className='absolute bottom-0 z-10 bg-transparent h-[250px] max-w-[800px] left-1/2 -translate-x-1/2'>
+    <div className='absolute bottom-0 z-10 bg-transparent h-[250px] max-w-[900px] left-1/2 -translate-x-1/2'>
       <Swiper
         effect={"coverflow"}
         grabCursor={true}

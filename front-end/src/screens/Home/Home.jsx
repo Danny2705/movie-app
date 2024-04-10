@@ -62,15 +62,18 @@ export default function Home({ scroll }) {
           </button>
         </div>
 
-        <div className='relative z-10 flex flex-col justify-center items-center gap-3'>
-          <h1 className='shadow-txt text-6xl uppercase font-extrabold opacity-70 max-w-[300px] text-center tracking-wider'>
+        <div className='relative z-10 flex flex-col justify-start items-center gap-3'>
+          <h1
+            key={selectedMovie.title}
+            className='shadow-txt text-6xl uppercase font-extrabold opacity-90 max-w-[300px] text-center tracking-wider'
+          >
             On {selectedMovie.date}
           </h1>
 
           <div className='flex items-center gap-4'>
             <button
               onClick={() => openVideo(embeddedUrl)}
-              className='border rounded-full text-2xl p-4 flex items-center justify-center text-[#DC143C] shadow-[#DC143C] shadow-xl'
+              className='vid-player border rounded-full text-2xl p-4 flex items-center justify-center text-[#DC143C] shadow-[#DC143C] shadow-xl'
             >
               <FaPlay />
             </button>

@@ -64,6 +64,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   overflow: hidden;
   padding-bottom: 100px;
 }
@@ -115,4 +116,29 @@ body {
   -webkit-mask: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
   -webkit-mask-clip: text, padding-box;
   -webkit-mask-composite: xor;
+}
+
+.title::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -20px;
+  height: 5px;
+  width: 50%;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #dc143c, #dc143c, transparent);
+  z-index: 1000;
+}
+
+@media screen and (max-width: 1000px) {
+  .navbar {
+    padding: 30px 50px;
+  }
+  .home .movie {
+    padding: 0 50px;
+    padding-bottom: 100px;
+  }
+  .home .vid-player {
+    padding: 0.75rem;
+  }
 }

@@ -10,9 +10,11 @@ export default function Navbar({ scroll }) {
         scroll > 100 ? "scrolled" : undefined
       } navbar py-4 flex items-center justify-between`}
     >
-      <Link to='/' className='logo text-xl'>
-        <span className='font-josefin text-[#DC143C]'>Anime</span>
-        <span className='font-josefin'>Cave</span>
+      <Link to='/' className='logo flex items-center'>
+        <span className='font-josefin text-[#DC143C] text-2xl tracking-wider'>
+          Anime
+        </span>
+        <span className='font-josefin text-lg'>Cave</span>
       </Link>
 
       {/* Website Links */}
