@@ -1,10 +1,8 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
 
 export default function Popular() {
   return (
-    <div className='px-[100px]'>
-      <Navbar />
+    <div className='px-[100px] h-[100vh]'>
       <h1>Popular</h1>
     </div>
   );

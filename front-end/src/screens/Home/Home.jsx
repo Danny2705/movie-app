@@ -5,7 +5,7 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import { FaPlay } from "react-icons/fa";
 import SwiperImage from "../../components/SwiperImage";
 
-export default function Home() {
+export default function Home({ scroll }) {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(
@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <div className='home'>
-      <Navbar />
+      <Navbar scroll={scroll} />
       <div className='movie'>
         <img
           src={backgroundImage}
@@ -62,7 +62,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className='relative z-10 flex flex-col justify-center items-center gap-3 h-full'>
+        <div className='relative z-10 flex flex-col justify-center items-center gap-3'>
           <h1 className='shadow-txt text-6xl uppercase font-extrabold opacity-70 max-w-[300px] text-center tracking-wider'>
             On {selectedMovie.date}
           </h1>

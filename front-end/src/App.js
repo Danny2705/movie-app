@@ -1,23 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./screens/Home/Home";
-import Trend from "./components/Trend/Trend";
-import Popular from "./components/Popular/Popular";
-import Character from "./components/Character/Character";
+import PopularPage from "./screens/PopularPage/PopularPage";
+import TrendPage from "./screens/TrendPage/TrendPage";
+import CharacterPage from "./screens/CharacterPage/CharacterPage";
 // import Navbar from "./components/Navbar/Navbar";
-// import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
+import Layout from "./screens/Layout/Layout";
 function App() {
   return (
     <BrowserRouter>
       <Toaster position='top-right' toastOptions={{ duration: 2000 }} />
-
       <Routes>
-        <Route path='/' Component={Home} />
-        <Route path='/popular' Component={Popular} />
-        <Route path='/trend' Component={Trend} />
-        <Route path='/character' Component={Character} />
+        <Route path='/' Component={Layout} />
+        <Route path='/popular' Component={PopularPage} />
+        <Route path='/trend' Component={TrendPage} />
+        <Route path='/character' Component={CharacterPage} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

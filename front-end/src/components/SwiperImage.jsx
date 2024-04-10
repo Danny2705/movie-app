@@ -21,7 +21,7 @@ export default function SwiperImage({ onImageClick }) {
         loop={true}
         slidesPerView={"auto"}
         autoplay={{
-          delay: 1500,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         modules={[EffectCoverflow, Navigation, Autoplay]}

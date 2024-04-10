@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 
 export default function Search() {
   return (
-    <div className='flex items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-xl'>
+    <div className='flex items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-sm'>
       <CiSearch />
       <input
         type='text'

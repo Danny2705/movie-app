@@ -13,6 +13,21 @@
   font-family: "Lato", sans-serif;
 }
 
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4a5568;
+  border-radius: 10px;
+  transition: all ease-in 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dc143c;
+}
+
 body {
   background-color: #000000;
   color: #ffffff;
@@ -73,8 +88,24 @@ body {
 }
 
 .navbar {
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 100px;
+  transition: 0.5s;
+  z-index: 10000;
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 2px solid #dc143c;
+  border-image: linear-gradient(90deg, transparent, #dc143c, transparent) 30;
+  backdrop-filter: blur(20px);
+  padding: 10px 100px;
 }
 
 .shadow-txt {
