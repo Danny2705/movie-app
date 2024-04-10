@@ -118,7 +118,7 @@ body {
   -webkit-mask-composite: xor;
 }
 
-.title::after {
+.heading::after {
   position: absolute;
   content: "";
   left: 0;
@@ -128,6 +128,25 @@ body {
   border-radius: 15px;
   background: linear-gradient(90deg, #dc143c, #dc143c, transparent);
   z-index: 1000;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 0 120px;
+  background: #000000;
+}
+
+main::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: -80px;
+  width: 100%;
+  height: 200px;
+  background: #000000;
+  filter: blur(50px);
 }
 
 @media screen and (max-width: 1000px) {
