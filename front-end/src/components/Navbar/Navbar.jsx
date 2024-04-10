@@ -6,8 +6,9 @@ import Login from "../../screens/Login/Login";
 export default function Navbar() {
   return (
     <div className='navbar py-4 flex items-center justify-between'>
-      <Link to='/' className='logo font-josefin text-xl'>
-        AnimeCave
+      <Link to='/' className='logo text-xl'>
+        <span className='font-josefin text-[#DC143C]'>Anime</span>
+        <span className='font-josefin'>Cave</span>
       </Link>
 
       {/* Website Links */}
