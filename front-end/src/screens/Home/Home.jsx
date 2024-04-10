@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import bgImg from "../../../public/assets/jjk.jpg";
 import Navbar from "../../components/Navbar/Navbar";
 import movieData from "../../data/movieData.json";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
@@ -9,6 +8,10 @@ import SwiperImage from "../../components/SwiperImage";
 export default function Home() {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState(
+    "../../assets/jjk.jpg"
+  );
+  const [selectedMovie, setSelectedMovie] = useState(movieData[1]);
 
   const openVideo = (videoSrc) => {
     setSelectedVideo(videoSrc);
@@ -20,29 +23,38 @@ export default function Home() {
     setIsVideoVisible(false);
   };
 
-  const movie = movieData[1];
-  const embeddedUrl = movie.video.replace("watch?v=", "embed/");
+  const handleImageClick = (imageUrl) => {
+    const clickedMovie = movieData.find((movie) => movie.bgImg === imageUrl);
+    if (clickedMovie) {
+      setBackgroundImage(clickedMovie.bgImg);
+      setSelectedMovie(clickedMovie);
+    }
+  };
+
+  const embeddedUrl = selectedMovie.video.replace("watch?v=", "embed/");
 
   return (
     <div className='home'>
       <Navbar />
       <div className='movie'>
         <img
-          src='/assets/jjk.jpg'
+          src={backgroundImage}
           alt='Background Img'
           className='bgImg active'
         />
         <div className='relative z-10 flex flex-col gap-3'>
-          <h1 className='text-5xl font-josefin'>{movie.title}</h1>
+          <h1 className='text-5xl font-josefin'>{selectedMovie.title}</h1>
           <div className='flex items-center gap-2'>
-            <span className='border px-1'>{movie.year} </span>
-            <span className='border px-1 bg-[#DC143C]'>{movie.ageLimit} </span>
-            <span className='border px-1'>{movie.length} </span>
-            <span className='border px-1'>{movie.category}</span>
+            <span className='border px-1'>{selectedMovie.year} </span>
+            <span className='border px-1 bg-[#DC143C]'>
+              {selectedMovie.ageLimit}{" "}
+            </span>
+            <span className='border px-1'>{selectedMovie.length} </span>
+            <span className='border px-1'>{selectedMovie.category}</span>
           </div>
 
           <p className='max-w-[500px] text-[grey] font-medium'>
-            {movie.description}
+            {selectedMovie.description}
           </p>
 
           <button className='w-fit bg-[#DC143C] hover:bg-[#da3354] duration-150 py-1 px-2'>
@@ -52,7 +64,7 @@ export default function Home() {
 
         <div className='relative z-10 flex flex-col justify-center items-center gap-3 h-full'>
           <h1 className='shadow-txt text-6xl uppercase font-extrabold opacity-70 max-w-[300px] text-center tracking-wider'>
-            On {movie.date}
+            On {selectedMovie.date}
           </h1>
 
           <div className='flex items-center gap-4'>
@@ -66,7 +78,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <SwiperImage />
+      <SwiperImage onImageClick={handleImageClick} />
       {isVideoVisible && (
         <VideoPlayer
           videoSrc={selectedVideo}

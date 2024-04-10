@@ -8,7 +8,10 @@ import "swiper/css/autoplay";
 import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
 import movieData from "../data/movieData.json";
 
-export default function SwiperImage() {
+export default function SwiperImage({ onImageClick }) {
+  const handleClick = (movie) => {
+    onImageClick(movie.bgImg);
+  };
   return (
     <div className='absolute bottom-0 z-10 bg-transparent h-[250px] max-w-[800px] left-1/2 -translate-x-1/2'>
       <Swiper
@@ -31,6 +34,7 @@ export default function SwiperImage() {
                 src={movie.bgImg}
                 alt={movie.title}
                 className='w-[200px] h-[250px] object-cover opacity-80'
+                onClick={() => handleClick(movie)}
               />
             </SwiperSlide>
           );

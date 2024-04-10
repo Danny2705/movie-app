@@ -15,14 +15,13 @@ export default function VideoPlayer({ videoSrc, isVisible, onClose }) {
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
               className='z-10'
             ></iframe>
+            <button
+              onClick={onClose}
+              className='absolute top-0 right-0 text-[#DC143C] text-2xl hover:text-[#da3354] transition-all duration-200'
+            >
+              <IoCloseCircleOutline />
+            </button>
           </div>
-
-          <button
-            onClick={onClose}
-            className='absolute top-24 right-[20rem] text-white text-4xl hover:text-[#DC143C] transition-all duration-200'
-          >
-            <IoCloseCircleOutline />
-          </button>
         </div>
       )}
     </>
