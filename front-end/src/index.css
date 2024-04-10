@@ -85,7 +85,3 @@ body {
   -webkit-mask-clip: text, padding-box;
   -webkit-mask-composite: xor;
 }
-
-.img-thumb {
-  background: rgba(0, 0, 0, 0.75);
-}
