@@ -5,16 +5,16 @@ import { fetchAnime } from "../../service.api.js/cosumet.api";
 
 export default function Popular() {
   const [selectedBtn, setSelectedBtn] = useState("All");
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
   const [showCategory, setShowCategory] = useState(Object.values(movieData));
 
   useEffect(() => {
     const fetchAnimes = async () => {
-      const data = await fetchAnime() 
-      setMovies(data.results)
-    }
-    fetchAnimes()
-  }, [])
+      const data = await fetchAnime();
+      setMovies(data.results);
+    };
+    fetchAnimes();
+  }, []);
   const btnName = [
     "All",
     "Day Top View",
