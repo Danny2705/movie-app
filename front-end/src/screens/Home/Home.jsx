@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import movieData from "../../data/movieData.json";
-import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
+import VideoPlayer from "../../components/VideoPlayer";
 import { FaPlay } from "react-icons/fa";
 import SwiperImage from "../../components/SwiperImage";
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Home from "../Home/Home";
 import Popular from "../../components/Popular/Popular";
+import Upcoming from "../../components/Upcoming/Upcoming";
 
 export default function Layout() {
   const [scroll, setScroll] = useState(0);
@@ -19,6 +20,7 @@ export default function Layout() {
     <div>
       <Home scroll={scroll} />
       <Popular />
+      <Upcoming />
     </div>
   );
 }

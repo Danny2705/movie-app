@@ -1,7 +1,7 @@
 import React from "react";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
-import Login from "../../screens/Login/Login";
+import { IoMdLogIn } from "react-icons/io";
 
 export default function Navbar({ scroll }) {
   return (
@@ -43,7 +43,12 @@ export default function Navbar({ scroll }) {
       <Search />
 
       {/* Log In Button */}
-      <Login />
+      <Link to='/login'>
+        <div className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-1 flex items-center gap-1 cursor-pointer'>
+          <IoMdLogIn />
+          <span className='font-josefin'>Log In</span>
+        </div>
+      </Link>
     </div>
   );
 }
