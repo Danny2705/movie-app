@@ -149,6 +149,10 @@ main::before {
   filter: blur(50px);
 }
 
+.login-container {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 @media screen and (max-width: 1000px) {
   .navbar {
     padding: 30px 50px;

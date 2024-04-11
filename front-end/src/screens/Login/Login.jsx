@@ -1,19 +1,17 @@
 import React from "react";
 import { IoMdLogIn } from "react-icons/io";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
 
 export default function Login() {
   return (
     <div className='home'>
-      <Navbar />
       <img
         src='/assets/aot.jpg'
         alt='Background Img'
         className='bgImg active'
       />
       <div className='flex justify-center h-[100vh] items-center relative z-10 w-full'>
-        <div className='bg-[#0b1023] px-10 py-12 border-2 border-[#262938] flex flex-col w-[400px] max-h-[400px] rounded-lg'>
+        <div className='login-container  px-10 py-12 border-2 border-[#262938] flex flex-col w-[400px] max-h-[400px] rounded-lg'>
           <Link to='/' className='logo flex items-center text-center w-full'>
             <div className='w-full text-center'>
               <span className='font-josefin text-[#DC143C] text-3xl tracking-wider'>
