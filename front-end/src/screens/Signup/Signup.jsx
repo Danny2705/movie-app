@@ -23,7 +23,10 @@ export default function Signup() {
           <div className='flex flex-col gap-4'>
             <form className='flex flex-col gap-5'>
               <div className='flex flex-col gap-1'>
-                <label htmlFor='Email' className='text-[#3a3e55] font-bold'>
+                <label
+                  htmlFor='Email'
+                  className='text-[#3a3e55] text-sm font-bold'
+                >
                   UserName
                 </label>
                 <input
@@ -33,7 +36,10 @@ export default function Signup() {
                 />
               </div>
               <div className='flex flex-col gap-1'>
-                <label htmlFor='Email' className='text-[#3a3e55] font-bold'>
+                <label
+                  htmlFor='Email'
+                  className='text-[#3a3e55] text-sm font-bold'
+                >
                   Email
                 </label>
                 <input
@@ -43,7 +49,10 @@ export default function Signup() {
                 />
               </div>
               <div className='flex flex-col gap-1'>
-                <label htmlFor='Password' className='text-[#3a3e55] font-bold'>
+                <label
+                  htmlFor='Password'
+                  className='text-[#3a3e55] text-sm font-bold'
+                >
                   Password
                 </label>
                 <input

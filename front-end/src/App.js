@@ -5,7 +5,6 @@ import CharacterPage from "./screens/CharacterPage/CharacterPage";
 import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 // import Navbar from "./components/Navbar/Navbar";
-// import Footer from "./components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import Layout from "./screens/Layout/Layout";
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Route path='/login' Component={Login} />
         <Route path='/signup' Component={Signup} />
       </Routes>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
