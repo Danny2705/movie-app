@@ -124,9 +124,22 @@
     "year": "2021",
     "date": "15th December",
     "ageLimit": "14+",
-    "length": "2 hours",
+    "length": "11 episodes",
     "category": "Magic",
     "type": "now_playing",
     "description": "Mushoku Tensei follows the story of Rudeus Greyrat, a NEET who is reincarnated into a fantasy world as a baby. With the memories of his past life intact, he resolves to make the most of his second chance and become the greatest mage in the world."
+  },
+  {
+    "id": 11,
+    "bgImg": "../../assets/aot.jpg",
+    "title": "Attack On Titan",
+    "video": "https://www.youtube.com/watch?v=E7WytLM2KvY",
+    "year": "2013",
+    "date": "15th December",
+    "ageLimit": "12+",
+    "length": "25 episodes",
+    "category": "Action, Super Power",
+    "type": "full",
+    "description": "In a world where humanity resides within enormous walled cities to protect themselves from Titans, gigantic humanoid creatures, a young boy named Eren Yeager becomes determined to fight back when the Titans breach his hometown's walls and devour his mother. This sets him on a path of vengeance and discovery, uncovering dark secrets about the Titans and his own origins."
   }
 ]
