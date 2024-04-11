@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import movieData from "../../data/movieData.json";
 import Card from "../Card";
+import { fetchAnime } from "../../service.api.js/cosumet.api";
 
 export default function Popular() {
   const [selectedBtn, setSelectedBtn] = useState("All");
+  const [movies, setMovies] = useState([])
   const [showCategory, setShowCategory] = useState(Object.values(movieData));
+
+  useEffect(() => {
+    const fetchAnimes = async () => {
+      const data = await fetchAnime() 
+      setMovies(data.results)
+    }
+    fetchAnimes()
+  }, [])
   const btnName = [
     "All",
     "Day Top View",
@@ -51,10 +61,10 @@ export default function Popular() {
 
         {/* A list of Movie Shows Here */}
         <div className='flex flex-wrap w-full justify-between gap-4'>
-          {showCategory.length === 0 ? (
+          {movies.length === 0 ? (
             <div>No movie data recorded</div>
           ) : (
-            showCategory.map((movie, i) => (
+            movies.map((movie, i) => (
               <div key={i} className='border max-w-[300px]'>
                 <Card movie={movie} />
               </div>
