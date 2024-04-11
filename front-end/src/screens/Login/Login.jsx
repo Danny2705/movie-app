@@ -8,7 +8,7 @@ export default function Login() {
     <div className='home'>
       <Navbar />
       <img
-        src='/assets/jjk.jpg'
+        src='/assets/aot.jpg'
         alt='Background Img'
         className='bgImg active'
       />

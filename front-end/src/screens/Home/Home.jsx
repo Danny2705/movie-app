@@ -9,9 +9,9 @@ export default function Home({ scroll }) {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(
-    "../../assets/jjk.jpg"
+    "../../assets/aot.jpg"
   );
-  const [selectedMovie, setSelectedMovie] = useState(movieData[1]);
+  const [selectedMovie, setSelectedMovie] = useState(movieData[10]);
 
   const openVideo = (videoSrc) => {
     setSelectedVideo(videoSrc);
