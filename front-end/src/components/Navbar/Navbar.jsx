@@ -24,20 +24,20 @@ export default function Navbar({ scroll }) {
       {/* Website Links */}
       <div className='flex items-center justify-around gap-4'>
         <Link
-          to='/popular'
-          className='font-josefin transition-all duration-500 hover:underline decoration-[#DC143C] underline-offset-8'
+          to='/library'
+          className='nav-link font-josefin transition-all duration-500 relative'
         >
-          Popular
+          Library
         </Link>
         <Link
           to='/trend'
-          className='font-josefin transition-all duration-500 hover:underline decoration-[#DC143C] underline-offset-8'
+          className='nav-link font-josefin transition-all duration-500 relative'
         >
           Trend
         </Link>
         <Link
           to='/character'
-          className='font-josefin transition-all duration-500 hover:underline decoration-[#DC143C] underline-offset-8'
+          className='nav-link font-josefin transition-all duration-500 relative'
         >
           Character
         </Link>

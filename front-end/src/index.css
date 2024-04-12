@@ -170,6 +170,21 @@ main::before {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
+.nav-link:after {
+  content: "";
+  position: absolute;
+  background-color: #dc143c;
+  height: 2px;
+  width: 0;
+  left: 0;
+  bottom: -5px;
+  transition: 0.7s;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
 @media screen and (max-width: 1000px) {
   .navbar {
     padding: 30px 50px;

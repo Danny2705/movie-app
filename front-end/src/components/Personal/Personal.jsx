@@ -33,6 +33,7 @@ export default function Personal() {
             </span>
             <IoMdLogIn />
           </div>
+          <button>Profile</button>
           <button>Watch List</button>
         </div>
       )}
