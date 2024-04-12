@@ -16,9 +16,10 @@ function App() {
           duration: 2000,
           style: {
             border: "1px solid #713200",
-            padding: "16px",
-            color: "#713200",
-            "z-index": 1000,
+            padding: "5px",
+            color: "black",
+            zIndex: 20000,
+            marginTop: "45px",
           },
         }}
       />

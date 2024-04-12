@@ -66,6 +66,7 @@ export default function Navbar({ scroll }) {
           onClick={logOut}
         >
           <span className='font-josefin'>Log Out</span>
+          <IoMdLogIn />
         </button>
       )}
     </div>

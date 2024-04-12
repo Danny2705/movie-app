@@ -46,7 +46,7 @@ export default function Login() {
         className='bgImg active'
       />
       /
-      <div className='flex justify-center h-[100vh] items-center relative z-10 w-full'>
+      <div className='flex justify-center items-center relative z-10 w-full'>
         <div className='login-container  px-10 py-12 border-2 border-[#262938] flex flex-col w-[400px] max-h-[400px] rounded-lg'>
           <Link to='/' className='logo flex items-center text-center w-full'>
             <div className='w-full text-center'>
