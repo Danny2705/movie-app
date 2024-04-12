@@ -70,14 +70,14 @@ export default function Home({ scroll }) {
             On {selectedMovie.date}
           </h1>
 
-          <div className='flex items-center gap-4'>
+          <div className='flex items-center justify-center gap-4'>
             <button
               onClick={() => openVideo(embeddedUrl)}
-              className='vid-player border rounded-full text-2xl p-4 flex items-center justify-center text-[#DC143C] shadow-[#DC143C] shadow-xl'
+              className='vid-player border rounded-full text-2xl h-16 w-16 pl-1 flex items-center justify-center text-[#DC143C] shadow-[#DC143C] shadow-xl'
             >
               <FaPlay />
             </button>
-            <span>Watch Trailer</span>
+            <span className='text-[24px]'>Watch Trailer</span>
           </div>
         </div>
       </div>

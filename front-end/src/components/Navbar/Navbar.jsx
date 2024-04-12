@@ -2,8 +2,18 @@ import React from "react";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/authSlice";
+import toast from "react-hot-toast";
 
 export default function Navbar({ scroll }) {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(logout());
+    toast.success("Logout successfully");
+  };
+
   return (
     <div
       className={`${
@@ -43,12 +53,22 @@ export default function Navbar({ scroll }) {
       <Search />
 
       {/* Log In Button */}
-      <Link to='/login'>
-        <div className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-1 flex items-center gap-1 cursor-pointer'>
+      {!user ? (
+        <Link to='/login'>
+          <div className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-1 flex items-center gap-1 cursor-pointer'>
+            <IoMdLogIn />
+            <span className='font-josefin'>Log In</span>
+          </div>
+        </Link>
+      ) : (
+        <button
+          className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-1 flex items-center gap-1 cursor-pointer'
+          onClick={logOut}
+        >
+          <span className='font-josefin'>Log Out</span>
           <IoMdLogIn />
-          <span className='font-josefin'>Log In</span>
-        </div>
-      </Link>
+        </button>
+      )}
     </div>
   );
 }
