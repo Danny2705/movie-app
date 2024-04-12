@@ -28,7 +28,7 @@ export default function Card({ movie }) {
     >
       <img
         src={movie.images.webp.large_image_url}
-        alt='Movie'
+        alt={movie.title}
         className='img-fluid'
         style={{
           width: "300px",

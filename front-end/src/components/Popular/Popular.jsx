@@ -69,7 +69,7 @@ export default function Popular() {
         {/* A list of Movie Shows Here */}
         <div className='flex flex-wrap w-full justify-between gap-4 gap-y-8'>
           {movies.length === 0 ? (
-            <div>No movie data recorded</div>
+            <div className='text-xl'>No movie data recorded</div>
           ) : (
             movies.map((movie, i) => (
               <div key={i} className='border max-w-[300px]'>
