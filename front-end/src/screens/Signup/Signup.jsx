@@ -1,13 +1,39 @@
 import React, { useState } from "react";
 import { IoMdLogIn } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { signUp } from "../../service.api.js/cosumet.api";
+import { register } from "../../redux/authSlice";
 
 export default function Signup() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const registerUser = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await signUp({
+        name: username,
+        email,
+        password,
+      });
+      console.log(response);
+      if (response.data) {
+        toast.success("Register successfully");
+        dispatch(register(response));
+        navigate("/login");
+      } else {
+        toast.error(response.response.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className='home'>
       <img
@@ -26,7 +52,7 @@ export default function Signup() {
             </div>
           </Link>
           <div className='flex flex-col gap-4'>
-            <form className='flex flex-col gap-5'>
+            <form className='flex flex-col gap-5' onSubmit={registerUser}>
               <div className='flex flex-col gap-1'>
                 <label
                   htmlFor='Email'
@@ -71,11 +97,14 @@ export default function Signup() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              <button
+                type='submit'
+                className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-2 flex items-center gap-1 cursor-pointer justify-center'
+              >
+                <IoMdLogIn />
+                <span className='font-josefin'>Sign Up</span>
+              </button>
             </form>
-            <div className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-2 flex items-center gap-1 cursor-pointer justify-center'>
-              <IoMdLogIn />
-              <span className='font-josefin'>Sign Up</span>
-            </div>
           </div>
           <span className='mt-4 flex items-center justify-center gap-2'>
             <p className='text-sm text-[#3a3e55] font-josefin'>
