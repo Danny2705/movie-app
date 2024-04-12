@@ -1,17 +1,24 @@
 import axios from "axios";
 
 //Default URL
-const url = "https://new-movie-phi.vercel.app/anime/zoro/";
+const url = "https://new-movie-phi.vercel.app/anime/gogoanime/";
 
 export const fetchAnime = async () => {
-  try {
-    const { data } = await axios.get(
-      'https://new-movie-phi.vercel.app/anime/zoro/""'
-    );
-    return data;
-  } catch (err) {
-    throw new Error(err.message);
-  }
+    try {
+        const { data } = await axios.get('https://new-movie-phi.vercel.app/anime/gogoanime/%20')
+        return data;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+};
+
+export const getAnimeInfo = async (id) => {
+    try {
+        const { data } = await axios.get(`https://new-movie-phi.vercel.app/anime/gogoanime/info/${id}`)
+        return data;
+    } catch (err) {
+        throw new Error(err.message);
+    }
 };
 
 export const searchAnime = async (name = "", page = 1) => {
