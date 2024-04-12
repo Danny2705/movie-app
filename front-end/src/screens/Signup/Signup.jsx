@@ -3,8 +3,8 @@ import { IoMdLogIn } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import { signUp } from "../../service.api.js/cosumet.api";
 import { register } from "../../redux/authSlice";
+import { signUp } from "../../service.api.js/api.service";
 
 export default function Signup() {
   const navigate = useNavigate();
