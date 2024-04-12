@@ -22,7 +22,7 @@ export default function Signup() {
         email,
         password,
       });
-      console.log(response);
+
       if (response.data) {
         toast.success("Register successfully");
         dispatch(register(response));
@@ -91,7 +91,7 @@ export default function Signup() {
                   Password
                 </label>
                 <input
-                  type='text'
+                  type='password'
                   value={password}
                   className='outline-none py-2 px-2 bg-[#070A16] border border-[#262938]'
                   onChange={(e) => setPassword(e.target.value)}

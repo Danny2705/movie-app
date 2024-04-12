@@ -10,7 +10,18 @@ import Layout from "./screens/Layout/Layout";
 function App() {
   return (
     <BrowserRouter>
-      <Toaster position='top-right' toastOptions={{ duration: 2000 }} />
+      <Toaster
+        position='top-center'
+        toastOptions={{
+          duration: 2000,
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+            "z-index": 1000,
+          },
+        }}
+      />
       <Routes>
         <Route path='/' Component={Layout} />
         <Route path='/popular' Component={PopularPage} />

@@ -11,10 +11,21 @@ const registerUser = async (req, res) => {
     if (!password) {
       return res.status(400).json({ message: "Password is required" });
     }
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+
+    let existingUser;
+    if (email) {
+      existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ message: "Email already exists" });
+      }
     }
+    if (name) {
+      existingUser = await User.findOne({ name });
+      if (existingUser) {
+        return res.status(400).json({ message: "Username already exists" });
+      }
+    }
+
     const hashPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       name,
@@ -36,8 +47,8 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    if (!name && !email) {
+    const { username, email, password } = req.body;
+    if (!username && !email) {
       return res.status(400).json({ message: "Username or email is required" });
     }
     if (!password) {
@@ -48,7 +59,7 @@ const loginUser = async (req, res) => {
     if (email) {
       existingUser = await User.findOne({ email });
     } else {
-      existingUser = await User.findOne({ name });
+      existingUser = await User.findOne({ name: username });
     }
 
     if (!existingUser) {
