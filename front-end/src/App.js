@@ -6,6 +6,7 @@ import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 import { Toaster } from "react-hot-toast";
 import Layout from "./screens/Layout/Layout";
+import MovieInfo from "./screens/MovieInfo/MovieInfo";
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path='/' Component={Layout} />
         <Route path='/library' Component={LibraryPage} />
+        <Route path='/library/title/:title/:id' Component={MovieInfo} />
         <Route path='/trend' Component={TrendPage} />
         <Route path='/character' Component={CharacterPage} />
         <Route path='/login' Component={Login} />

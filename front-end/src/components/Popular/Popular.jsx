@@ -5,6 +5,7 @@ import {
   getAnimeByGenres,
   getPopularAnime,
 } from "../../service.api.js/jikan.api";
+import { Link } from "react-router-dom";
 
 const genres = [
   { title: "All", id: 0 },
@@ -72,9 +73,14 @@ export default function Popular() {
             <div className='text-xl'>No movie data recorded</div>
           ) : (
             movies.map((movie, i) => (
-              <div key={i} className='border max-w-[300px]'>
-                <Card movie={movie} />
-              </div>
+              <Link
+                key={i}
+                to={`/library/title/${movie.title}/${movie.mal_id}`}
+              >
+                <div className='border max-w-[300px]'>
+                  {<Card movie={movie} />}
+                </div>
+              </Link>
             ))
           )}
         </div>

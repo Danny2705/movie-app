@@ -51,3 +51,12 @@ export const getAllAnime = async () => {
     throw new Error(err.message);
   }
 };
+
+export const getAnimeById = async (anime_id) => {
+  try {
+    const { data } = await axios.get(url + `/${anime_id}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

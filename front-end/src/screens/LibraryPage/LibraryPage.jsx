@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import letters from "../../data/letterData.json";
 import { getAllAnime, getAnimeByLetter } from "../../service.api.js/jikan.api";
 import Card from "../../components/Card";
+import { Link } from "react-router-dom";
 
 export default function LibraryPage() {
   const [scroll, setScroll] = useState(0);
@@ -44,8 +45,12 @@ export default function LibraryPage() {
     <div className='px-[100px] min-h-[100vh] py-20'>
       <Navbar scroll={scroll} />
       <div className='mt-[80px] flex flex-col gap-4'>
-        <h4 className='text-[13px] cursor-pointer hover:text-[grey] w-fit duration-500'>
-          A - Z list / {selectBtn}
+        <h4 className='text-[13px] cursor-pointer w-fit'>
+          <Link to='/' className='hover:text-[grey] duration-500'>
+            Home
+          </Link>{" "}
+          / <span className='hover:text-[grey] duration-500'>A - Z list</span> /{" "}
+          <span className='hover:text-[grey] duration-500'>{selectBtn}</span>
         </h4>
 
         <h1 className='bg-main-red w-fit px-2 py-1 text-lg rounded-t-md'>
@@ -79,9 +84,14 @@ export default function LibraryPage() {
             <div className='text-xl'>No movie data recorded</div>
           ) : (
             moviesLetter.map((movie, i) => (
-              <div key={i} className='border max-w-[300px]'>
-                {<Card movie={movie} />}
-              </div>
+              <Link
+                key={i}
+                to={`/library/title/${movie.title}/${movie.mal_id}`}
+              >
+                <div className='border max-w-[300px]'>
+                  {<Card movie={movie} />}
+                </div>
+              </Link>
             ))
           )}
         </div>
