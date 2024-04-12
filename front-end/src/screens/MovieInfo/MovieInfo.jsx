@@ -48,34 +48,42 @@ export default function MovieInfo() {
           Anime Information
         </h1>
 
-        <div className='flex px-10 gap-4'>
-          <img
-            src={animeInfo.images?.webp.large_image_url}
-            alt={animeInfo.title}
-            style={{
-              width: "300px",
-              height: "400px",
-            }}
-          />
-
-          <div className='flex flex-col justify-start gap-2'>
-            <h1 className='text-2xl text-main-red font-josefin max-w-[550px]'>
-              {animeInfo.title} / {animeInfo.title_english} /{" "}
-              {animeInfo.title_japanese}
-            </h1>
-            <h2>{animeInfo.type}</h2>
-            <div
-              className='description-container max-w-[550px] border-b-[0.5px] border-[grey] pr-2 pb-2'
-              style={{ maxHeight: "200px", overflowY: "auto" }}
-            >
-              <p className='text-[grey] text-sm'>{animeInfo.synopsis}</p>
+        {animeInfo.length === 0 ? (
+          <div>Loading...</div>
+        ) : (
+          <div className='flex items-center flex-wrap'>
+            <div className='flex pr-10 gap-4'>
+              <img
+                src={animeInfo.images?.webp.large_image_url}
+                alt={animeInfo.title}
+                style={{
+                  width: "300px",
+                  height: "400px",
+                }}
+              />
+              <div className='flex flex-col justify-start gap-2'>
+                <h1 className='text-2xl text-main-red font-josefin max-w-[550px]'>
+                  {animeInfo.title} / {animeInfo.title_english} /{" "}
+                  {animeInfo.title_japanese}
+                </h1>
+                <h2>{animeInfo.type}</h2>
+                <div
+                  className='description-container max-w-[550px] border-b-[0.5px] border-[grey] pr-2 pb-2'
+                  style={{ maxHeight: "200px", overflowY: "auto" }}
+                >
+                  <p className='text-[grey] text-sm'>{animeInfo.synopsis}</p>
+                </div>
+                <div>
+                  <View info={animeInfo} />
+                </div>
+              </div>
             </div>
 
-            <div>
-              <View info={animeInfo} />
+            <div className='flex justify-start items-start'>
+              Right Container View
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
