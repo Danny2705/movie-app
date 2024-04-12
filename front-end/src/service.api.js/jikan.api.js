@@ -60,3 +60,12 @@ export const getAnimeById = async (anime_id) => {
     throw new Error(error.message);
   }
 };
+
+export const getAnimeRelations = async (anime_id) => {
+  try {
+    const { data } = await axios.get(url + `/${anime_id}/recommendations`);
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

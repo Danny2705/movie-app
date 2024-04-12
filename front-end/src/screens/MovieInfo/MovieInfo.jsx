@@ -4,12 +4,12 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getAnimeById } from "../../service.api.js/jikan.api";
 import View from "../../components/View";
+import RightMovie from "../../components/RightMovie";
 
 export default function MovieInfo() {
   const params = useParams();
   const [scroll, setScroll] = useState(0);
   const [animeInfo, setAnimeInfo] = useState([]);
-  console.log(animeInfo);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -51,8 +51,8 @@ export default function MovieInfo() {
         {animeInfo.length === 0 ? (
           <div>Loading...</div>
         ) : (
-          <div className='flex items-center flex-wrap'>
-            <div className='flex pr-10 gap-4'>
+          <div className='flex items-start flex-wrap w-full gap-10'>
+            <div className='flex gap-4 min-h-[100vh]'>
               <img
                 src={animeInfo.images?.webp.large_image_url}
                 alt={animeInfo.title}
@@ -79,8 +79,8 @@ export default function MovieInfo() {
               </div>
             </div>
 
-            <div className='flex justify-start items-start'>
-              Right Container View
+            <div className='flex items-start bg-[#0f1416] justify-end'>
+              <RightMovie id={params.id} />
             </div>
           </div>
         )}
