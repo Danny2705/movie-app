@@ -3,7 +3,7 @@ import "./Card.css";
 import { FaPlay } from "react-icons/fa";
 
 export default function Card({ movie }) {
-  console.log(movie);
+  // console.log(movie);
   const [toggle, setToggle] = useState(false);
   return (
     <div

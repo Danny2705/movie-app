@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdLogIn } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function Signup() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className='home'>
       <img
@@ -32,7 +37,9 @@ export default function Signup() {
                 <input
                   type='text'
                   placeholder='animeCave'
+                  value={username}
                   className='outline-none py-2 px-2 bg-[#070A16] border border-[#262938]'
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div className='flex flex-col gap-1'>
@@ -44,8 +51,10 @@ export default function Signup() {
                 </label>
                 <input
                   type='text'
+                  value={email}
                   placeholder='animeCave@gmail.com'
                   className='outline-none py-2 px-2 bg-[#070A16] border border-[#262938]'
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className='flex flex-col gap-1'>
@@ -57,7 +66,9 @@ export default function Signup() {
                 </label>
                 <input
                   type='text'
+                  value={password}
                   className='outline-none py-2 px-2 bg-[#070A16] border border-[#262938]'
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </form>
