@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import './Card.css';
 import { FaPlay } from 'react-icons/fa';
@@ -90,4 +91,3 @@ export default function Card({ movie, type='normal' }) {
 			)}
 		</div>
 	);
-}

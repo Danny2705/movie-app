@@ -2,17 +2,11 @@ import React from "react";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/authSlice";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import Personal from "../Personal/Personal";
 
 export default function Navbar({ scroll }) {
   const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-  const logOut = () => {
-    dispatch(logout());
-    toast.success("Logout successfully");
-  };
 
   return (
     <div
@@ -30,20 +24,20 @@ export default function Navbar({ scroll }) {
       {/* Website Links */}
       <div className='flex items-center justify-around gap-4'>
         <Link
-          to='/popular'
-          className='font-josefin transition-all duration-500 hover:underline decoration-[#DC143C] underline-offset-8'
+          to='/library'
+          className='nav-link font-josefin transition-all duration-500 relative'
         >
-          Popular
+          Library
         </Link>
         <Link
           to='/trend'
-          className='font-josefin transition-all duration-500 hover:underline decoration-[#DC143C] underline-offset-8'
+          className='nav-link font-josefin transition-all duration-500 relative'
         >
           Trend
         </Link>
         <Link
           to='/character'
-          className='font-josefin transition-all duration-500 hover:underline decoration-[#DC143C] underline-offset-8'
+          className='nav-link font-josefin transition-all duration-500 relative'
         >
           Character
         </Link>
@@ -61,13 +55,7 @@ export default function Navbar({ scroll }) {
           </div>
         </Link>
       ) : (
-        <button
-          className='bg-[#DC143C] hover:bg-[#da3354] px-2 py-1 flex items-center gap-1 cursor-pointer'
-          onClick={logOut}
-        >
-          <span className='font-josefin'>Log Out</span>
-          <IoMdLogIn />
-        </button>
+        <Personal />
       )}
     </div>
   );

@@ -24,7 +24,7 @@ export default function Search() {
                   key={movie.id}
                   className='w-[250px] bg-opacity-80 bg-black px-3 flex flex-col pt-2 py-2 justify-center'
                 >
-                  <Link to='/'>
+                  <Link to='/library'>
                     <div className='flex items-center gap-4'>
                       <img
                         src={movie.bgImg}
