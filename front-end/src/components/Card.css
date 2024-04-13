@@ -2,7 +2,9 @@
   height: 200px;
   background-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1));
   
+  
 }
+
 
 .thumbnail-name {
   display: -webkit-box;
@@ -15,3 +17,38 @@
   white-space: normal;
 }
 
+.hover-card:hover {
+  animation: darken .5s linear;
+  background-color: #00000080;
+}
+
+.play-btn {
+  opacity: 1;
+  animation: zoomOut .5s linear;
+
+}
+
+@keyframes darken{
+   
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 50%;
+    }
+  
+}
+
+@keyframes zoomOut{
+   
+    0%{
+      transform: scale(0);
+    }
+    90%{
+      transform: scale(1.2);
+    }
+    100%{
+      transform: scale(1)
+    }
+  
+}
