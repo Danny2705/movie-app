@@ -12,6 +12,16 @@ export const getPopularAnime = async () => {
   }
 };
 
+export const getUpcomingAnime = async () => {
+	try {
+		const { data } = await axios.get(url + '?order_by=popularity&status=upcoming');
+    console.log(data)
+		return data;
+	} catch (err) {
+		throw new Error(err.message);
+	}
+};
+
 export const getAnimeByGenres = async (genre_id) => {
   try {
     const { data } = await axios.get(
