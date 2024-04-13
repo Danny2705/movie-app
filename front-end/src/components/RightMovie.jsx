@@ -46,7 +46,7 @@ export default function RightMovie({ id }) {
                 height={50}
               />
               <div>
-                <h1 className='text-white'>{anime.entry.title}</h1>
+                <h1 className='text-white text-left'>{anime.entry.title}</h1>
                 <h2 className='text-main-banana flex items-center gap-1'>
                   <FaStar /> {anime.votes} Votes
                 </h2>
