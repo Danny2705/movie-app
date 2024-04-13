@@ -78,8 +78,8 @@ export const renderMovie = (selected, info, detail) => {
     return (
       <div className=''>
         <div className='flex min-h-[100vh] flex-wrap justify-between mt-4 max-w-[866px]'>
-          {detail.map((character) => (
-            <div key={character.mal_id}>
+          {detail.map((character, i) => (
+            <div key={i}>
               <div className='w-[200px] h-[330px] relative '>
                 <div className='name-container'>
                   <img
@@ -117,8 +117,8 @@ export const renderMovie = (selected, info, detail) => {
   } else if (selected === "Image") {
     return (
       <div className='mt-4 w-full flex flex-wrap gap-4 max-w-[866px]'>
-        {detail.map((pic) => (
-          <div key={pic}>
+        {detail.map((pic, index) => (
+          <div key={index}>
             <div className='w-[200px] h-[330px]'>
               <img
                 src={pic.webp.large_image_url}
@@ -134,8 +134,8 @@ export const renderMovie = (selected, info, detail) => {
     return (
       <div className=''>
         <div className='flex min-h-[100vh] flex-wrap justify-between mt-4 max-w-[866px]'>
-          {detail.map((staff) => (
-            <div key={staff}>
+          {detail.map((staff, i) => (
+            <div key={i}>
               <div className='w-[200px] h-[330px] relative '>
                 <div className='name-container'>
                   <img
