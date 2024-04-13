@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getAnimeById } from "../../service.api.js/jikan.api";
 import View from "../../components/View";
 import RightMovie from "../../components/RightMovie";
+import MovieDetail from "../../components/MovieDetail/MovieDetail";
 
 export default function MovieInfo() {
   const params = useParams();
@@ -43,7 +44,6 @@ export default function MovieInfo() {
             {params.title} / Info
           </span>
         </h4>
-
         <h1 className='bg-main-red w-fit px-2 py-1 text-lg rounded-t-md'>
           Anime Information
         </h1>
@@ -52,30 +52,39 @@ export default function MovieInfo() {
           <div>Loading...</div>
         ) : (
           <div className='flex items-start flex-wrap w-full gap-10'>
-            <div className='flex gap-4 min-h-[100vh]'>
-              <img
-                src={animeInfo.images?.webp.large_image_url}
-                alt={animeInfo.title}
-                style={{
-                  width: "300px",
-                  height: "400px",
-                }}
-              />
-              <div className='flex flex-col justify-start gap-2'>
-                <h1 className='text-2xl text-main-red font-josefin max-w-[550px]'>
-                  {animeInfo.title} / {animeInfo.title_english} /{" "}
-                  {animeInfo.title_japanese}
-                </h1>
-                <h2>{animeInfo.type}</h2>
-                <div
-                  className='description-container max-w-[550px] border-b-[0.5px] border-[grey] pr-2 pb-2'
-                  style={{ maxHeight: "200px", overflowY: "auto" }}
-                >
-                  <p className='text-[grey] text-sm'>{animeInfo.synopsis}</p>
+            <div>
+              <div className='flex gap-4'>
+                <img
+                  src={animeInfo.images?.webp.large_image_url}
+                  alt={animeInfo.title}
+                  style={{
+                    width: "300px",
+                    height: "400px",
+                  }}
+                />
+                <div className='flex flex-col justify-start gap-2'>
+                  <div>
+                    <h1 className='text-2xl text-main-red font-josefin max-w-[550px]'>
+                      {animeInfo.title} / {animeInfo.title_english} /{" "}
+                      {animeInfo.title_japanese}
+                    </h1>
+                    <h2>{animeInfo.type}</h2>
+                    <div
+                      className='description-container max-w-[550px] border-b-[0.5px] border-[grey] pr-2 pb-2'
+                      style={{ maxHeight: "200px", overflowY: "auto" }}
+                    >
+                      <p className='text-[grey] text-sm'>
+                        {animeInfo.synopsis}
+                      </p>
+                    </div>
+                    <div>
+                      <View info={animeInfo} />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <View info={animeInfo} />
-                </div>
+              </div>
+              <div>
+                <MovieDetail info={animeInfo} />
               </div>
             </div>
 

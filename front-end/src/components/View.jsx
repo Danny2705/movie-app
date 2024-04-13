@@ -24,7 +24,7 @@ export default function View({ info }) {
 
       <h1 className='flex items-center gap-2'>
         <FaEye className='text-[orange]' />
-        {info.members}
+        {info.members.toLocaleString()}
       </h1>
     </div>
   );

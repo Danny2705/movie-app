@@ -60,8 +60,8 @@ export default function LibraryPage() {
         <div className='flex items-center w-full justify-between flex-wrap gap-2'>
           <button
             className={`${
-              selectBtn === "Show All" ? "bg-secondary-hover" : "bg-slate-900"
-            } bg-slate-900 hover:bg-secondary-hover duration-500 px-3 py-1`}
+              selectBtn === "Show All" ? "bg-main-red" : "bg-slate-900"
+            } hover:bg-secondary-hover duration-500 px-3 py-1`}
             onClick={handleShowAll}
           >
             Show All
@@ -70,8 +70,8 @@ export default function LibraryPage() {
             <button
               key={letter}
               className={`${
-                selectBtn === letter ? "bg-secondary-hover" : "bg-slate-900"
-              } bg-slate-900 hover:bg-secondary-hover duration-500 px-3 py-1 rounded-md`}
+                selectBtn === letter ? "bg-main-red" : "bg-slate-900"
+              } hover:bg-secondary-hover duration-500 px-3 py-1 rounded-md`}
               onClick={() => handleBtnClick(letter)}
             >
               {letter}
