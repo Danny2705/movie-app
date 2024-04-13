@@ -1,7 +1,6 @@
-.thubnail-header {
+.thumbnail-header {
   height: 200px;
-  background-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1));
-  
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 
 .thumbnail-name {
@@ -14,4 +13,3 @@
   text-overflow: ellipsis;
   white-space: normal;
 }
-

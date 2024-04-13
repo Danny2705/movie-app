@@ -78,3 +78,21 @@ export const getAnimeCharacters = async (anime_id) => {
     throw new Error(error.message);
   }
 };
+
+export const getAnimePictures = async (anime_id) => {
+  try {
+    const { data } = await axios.get(url + `/${anime_id}/pictures`);
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getAnimeStaff = async (anime_id) => {
+  try {
+    const { data } = await axios.get(url + `/${anime_id}/staff`);
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

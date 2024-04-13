@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { getAnimeCharacters } from "../../service.api.js/jikan.api";
+import {
+  getAnimeCharacters,
+  getAnimePictures,
+  getAnimeStaff,
+} from "../../service.api.js/jikan.api";
 import { renderMovie } from "./renderMovie";
 
-const lists = ["Movie Detail", "Character", "Trailer", "Image"];
+const lists = ["Movie Detail", "Character", "Trailer", "Image", "Staff"];
 
 export default function MovieDetail({ info }) {
   const [detail, setDetail] = useState([]);
@@ -12,6 +16,12 @@ export default function MovieDetail({ info }) {
     if (id === "Character") {
       const data = await getAnimeCharacters(info.mal_id);
       setDetail(data.data);
+    } else if (id === "Image") {
+      const data = await getAnimePictures(info.mal_id);
+      setDetail(data.data);
+    } else if (id === "Staff") {
+      const data = await getAnimeStaff(info.mal_id);
+      setDetail(data.data);
     } else {
       setDetail(info);
     }
@@ -20,10 +30,10 @@ export default function MovieDetail({ info }) {
 
   return (
     <div className='mt-4'>
-      <div className='flex items-center justify-between w-full'>
-        {lists.map((list, index) => (
+      <div className='flex items-center gap-4 w-full'>
+        {lists.map((list) => (
           <button
-            key={index}
+            key={list}
             className={`${
               selected === list ? "bg-main-red" : "bg-slate-900"
             } py-1 px-4`}

@@ -42,7 +42,7 @@ export default function Card({ movie }) {
           </div>
         </div>
       ) : (
-        <div className='absolute w-full top-0 thubnail-header flex'>
+        <div className='absolute w-full top-0 thumbnail-header flex'>
           <span className='flex-[4] flex flex-col p-2 text-xl'>
             <div className=' thumbnail-name'>
               {movie.title_english}
