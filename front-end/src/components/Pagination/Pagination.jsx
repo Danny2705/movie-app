@@ -40,7 +40,7 @@ export default function Pagination({ setMoviesLetter }) {
   const generatePageNumbers = (startPage = currentPage) => {
     const start = Math.max(1, startPage);
     const end = Math.min(start + 4, 25);
-    return Array.from({ length: end - start + 1 }, (i) => start + i);
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   };
 
   return (
