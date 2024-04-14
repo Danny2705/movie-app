@@ -44,7 +44,7 @@ export default function Navbar({ scroll }) {
       </div>
 
       {/* Search bar */}
-      <Search />
+      <Search  />
 
       {/* Log In Button */}
       {!user ? (

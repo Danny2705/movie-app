@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { BrowserRouter } from "react-router-use-history";
+import { BrowserRouter } from "react-router-dom";
 import LibraryPage from "./screens/LibraryPage/LibraryPage";
 import TrendPage from "./screens/TrendPage/TrendPage";
 import Login from "./screens/Login/Login";
