@@ -52,8 +52,8 @@ export default function MovieInfo() {
           <div>Loading...</div>
         ) : (
           <div className='flex items-start justify-between flex-wrap w-full gap-10'>
-            <div className="flex-[3]">
-              <div className='flex gap-4'>
+            <div className='flex-[3]'>
+              <div className='flex gap-4 min-w-[620px] max-w-full'>
                 <img
                   src={animeInfo.images?.webp.large_image_url}
                   alt={animeInfo.title}
@@ -64,13 +64,13 @@ export default function MovieInfo() {
                 />
                 <div className='flex flex-col justify-start gap-2'>
                   <div>
-                    <h1 className='text-2xl text-main-red font-josefin max-w-[700px]'>
+                    <h1 className='text-2xl text-main-red font-josefin max-w-full'>
                       {animeInfo.title} / {animeInfo.title_english} /{" "}
                       {animeInfo.title_japanese}
                     </h1>
                     <h2>{animeInfo.type}</h2>
                     <div
-                      className='description-container max-w-[700px] border-b-[0.5px] border-[grey] pr-2 pb-2'
+                      className='description-container max-w-ful border-b-[0.5px] border-[grey] pr-2 pb-2'
                       style={{ maxHeight: "200px", overflowY: "auto" }}
                     >
                       <p className='text-[grey] text-sm'>
@@ -87,12 +87,11 @@ export default function MovieInfo() {
                 <MovieDetail info={animeInfo} />
               </div>
             </div>
-<div className="flex-1">
-            <div className='flex items-start bg-[#0f1416] justify-end'>
-              <RightMovie id={params.id} />
+            <div className='flex-1'>
+              <div className='flex items-start bg-[#0f1416] justify-center'>
+                <RightMovie id={params.id} />
+              </div>
             </div>
-
-</div>
           </div>
         )}
       </div>

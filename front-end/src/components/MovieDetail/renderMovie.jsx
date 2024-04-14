@@ -4,69 +4,120 @@ export const renderMovie = (selected, info, detail) => {
   if (selected === "Movie Detail") {
     return (
       <div>
-        <div className='w-full bg-[#0f1416] mt-4 p-4 px-10 flex justify-between'>
+        <div className='w-full bg-[#0f1416] mt-4 p-4 px-10 flex max-w-[828px]:flex-col justify-between'>
           <div className='flex flex-col gap-3'>
             <h2 className='text-sm flex items-center gap-3'>
-              Episodes:{" "}
-              <span className='text-main-red font-bold'>{info.episodes}</span>
+              <span>Episodes:</span>
+              <span className='text-main-red font-bold'>
+                {info.episodes ? (
+                  info.episodes
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
+              </span>
             </h2>
             <p className='text-sm flex items-center gap-3'>
-              Status:{" "}
-              <span className='text-main-red font-bold'>{info.status}</span>
-            </p>
-            <p className='text-sm flex items-center gap-3'>
-              Duration:{" "}
-              <span className='text-main-red font-bold'>{info.duration}</span>
-            </p>
-            <p className='text-sm flex items-center gap-3'>
-              Season:{" "}
-              <span className='text-main-red capitalize font-bold'>
-                {info.season}
+              <span>Status:</span>
+              <span className='text-main-red font-bold'>
+                {info.status ? (
+                  info.status
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
               </span>
             </p>
             <p className='text-sm flex items-center gap-3'>
-              Themes:{" "}
+              <span>Duration:</span>
               <span className='text-main-red font-bold'>
-                {info.themes.map((theme, index) => (
-                  <span key={index}>
-                    {index !== 0 && ", "} {theme.name}
-                  </span>
-                ))}
+                {info.duration ? (
+                  info.duration
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
+              </span>
+            </p>
+            <p className='text-sm flex items-center gap-3'>
+              <span>Season:</span>
+              <span className='text-main-red capitalize font-bold'>
+                {info.season ? (
+                  info.season
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
+              </span>
+            </p>
+            <p className='text-sm flex items-center gap-3'>
+              <span>Themes:</span>
+              <span className='text-main-red font-bold'>
+                {info.themes.length > 0 ? (
+                  info.themes.map((theme, index) => (
+                    <span key={index}>
+                      {index !== 0 && ", "} {theme.name}
+                    </span>
+                  ))
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
               </span>
             </p>
           </div>
           <div className='flex flex-col gap-3'>
-            <h2 className='text-sm flex items-center gap-3'>
-              Genres:{" "}
+            <h2 className='text-sm flex items-start gap-3'>
+              <span>Genres:</span>
               <span className='text-main-red font-bold'>
-                {info.genres.map((genre, index) => (
-                  <span key={index}>
-                    {index !== 0 && ", "} {genre.name}
-                  </span>
-                ))}
+                {info.genres.length > 0 ? (
+                  info.genres.map((genre, index) => (
+                    <span key={index}>
+                      {index !== 0 && ", "} {genre.name}
+                    </span>
+                  ))
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
               </span>
             </h2>
-            <p className='text-sm flex items-center gap-3'>
-              Rating:{" "}
-              <span className='text-main-red font-bold'>{info.rating}</span>
-            </p>
-            <p className='text-sm flex items-center gap-3'>
-              Rank: <span className='text-main-red font-bold'>{info.rank}</span>
-            </p>
-            <p className='text-sm flex items-center gap-3'>
-              Studio:{" "}
+            <p className='text-sm flex items-start gap-3'>
+              <span>Rating:</span>
               <span className='text-main-red font-bold'>
-                {info.studios.map((studio, index) => (
-                  <span key={index}>
-                    {index !== 0 && ", "} {studio.name}
-                  </span>
-                ))}
+                {info.rating ? (
+                  info.rating
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
               </span>
             </p>
-            <p className='text-sm flex items-center gap-3'>
-              Favorite:{" "}
+            <p className='text-sm flex items-start gap-3'>
+              <span>Rank:</span>
               <span className='text-main-red font-bold'>
-                {info.favorites.toLocaleString()}
+                {info.rank ? (
+                  info.rank
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
+              </span>
+            </p>
+            <p className='text-sm flex items-start gap-3'>
+              <span>Studio:</span>
+              <span className='text-main-red font-bold'>
+                {info.studios.length > 0 ? (
+                  info.studios.map((studio, index) => (
+                    <span key={index}>
+                      {index !== 0 && ", "} {studio.name}
+                    </span>
+                  ))
+                ) : (
+                  <span>Updating...</span>
+                )}
+              </span>
+            </p>
+            <p className='text-sm flex items-start gap-3'>
+              <span>Favorite:</span>
+              <span className='text-main-red font-bold'>
+                {info.favorites ? (
+                  info.favorites.toLocaleString()
+                ) : (
+                  <span className='text-[grey]'>Updating...</span>
+                )}
               </span>
             </p>
           </div>

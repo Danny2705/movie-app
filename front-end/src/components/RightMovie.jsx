@@ -18,7 +18,7 @@ export default function RightMovie({ id }) {
     setDisplayCount((prevCount) => prevCount + 20);
   };
   return (
-    <div className='min-h-[100vh] w-[420px] p-4 flex flex-col gap-3'>
+    <div className='min-h-[100vh] w-full min-w-[420px] p-4 flex flex-col gap-3'>
       <h1 className='border-b border-[#b5e745] pb-1'>
         Don't know what <span className='font-josefin'>Anime</span> to watch?
       </h1>
