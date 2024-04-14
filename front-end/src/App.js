@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-use-history";
 import LibraryPage from "./screens/LibraryPage/LibraryPage";
 import TrendPage from "./screens/TrendPage/TrendPage";
 import Login from "./screens/Login/Login";
@@ -7,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Layout from "./screens/Layout/Layout";
 import MovieInfo from "./screens/MovieInfo/MovieInfo";
 import CharacterPage from "./screens/CharacterPage/CharacterPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,13 +26,15 @@ function App() {
         }}
       />
       <Routes>
-        <Route path='/' Component={Layout} />
-        <Route path='/library' Component={LibraryPage} />
-        <Route path='/library/title/:title/:id' Component={MovieInfo} />
-        <Route path='/trend' Component={TrendPage} />
-        <Route path='/character' Component={CharacterPage} />
-        <Route path='/login' Component={Login} />
-        <Route path='/signup' Component={Signup} />
+        <Route path='/' element={<Layout />} />
+        <Route path='/library' element={<Navigate to='/library/ShowAll' />} />
+        <Route path='/library/:letter' element={<LibraryPage />} />
+        <Route path='/library/title/:title/:id' element={<MovieInfo />} />
+        <Route path='/library/page/:page_number' element={<MovieInfo />} />
+        <Route path='/trend' element={<TrendPage />} />
+        <Route path='/character' element={<CharacterPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );

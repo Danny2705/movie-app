@@ -3,12 +3,15 @@ import Navbar from "../../components/Navbar/Navbar";
 import letters from "../../data/letterData.json";
 import { getAllAnime, getAnimeByLetter } from "../../service.api.js/jikan.api";
 import Card from "../../components/Card";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Pagination from "../../components/Pagination/Pagination";
 
 export default function LibraryPage() {
   const [scroll, setScroll] = useState(0);
   const [selectBtn, setSelectBtn] = useState("Show All");
   const [moviesLetter, setMoviesLetter] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -23,22 +26,34 @@ export default function LibraryPage() {
 
   useEffect(() => {
     const fetchAnimes = async () => {
-      const data = await getAllAnime();
-      setMoviesLetter(data.data);
+      const pathname = location.pathname.split("/");
+      setSelectBtn(pathname[2] === "ShowAll" ? "Show All" : pathname[2]);
+      if (pathname[2] === "ShowAll") {
+        const data = await getAllAnime();
+        setMoviesLetter(data.data);
+      } else {
+        const data = await getAnimeByLetter(pathname[2]);
+        setMoviesLetter(data.data);
+      }
     };
     fetchAnimes();
-  }, []);
+  }, [location.pathname]);
 
   const handleBtnClick = async (letter) => {
     setSelectBtn(letter);
     const data = await getAnimeByLetter(letter);
+    console.log(data.data);
     setMoviesLetter(data.data);
+
+    navigate(`/library/${letter}`);
   };
 
   const handleShowAll = async () => {
     const data = await getAllAnime();
     setSelectBtn("Show All");
+
     setMoviesLetter(data.data);
+    navigate(`/library/ShowAll`);
   };
 
   return (
@@ -74,26 +89,31 @@ export default function LibraryPage() {
               } hover:bg-secondary-hover duration-500 px-3 py-1 rounded-md`}
               onClick={() => handleBtnClick(letter)}
             >
-              {letter}
+              <Link to={`/library/${letter}`}>{letter}</Link>
             </button>
           ))}
         </div>
 
         <div className='flex flex-wrap w-full justify-between gap-4 gap-y-8'>
           {moviesLetter.length === 0 ? (
-            <div className='text-xl'>No movie data recorded</div>
+            <div className='text-xl h-[100vh]'>Loading ...</div>
           ) : (
-            moviesLetter.map((movie, i) => (
-              <Link
-                key={i}
-                to={`/library/title/${movie.title}/${movie.mal_id}`}
-              >
-                <div className='border max-w-[300px]'>
-                  {<Card movie={movie} />}
-                </div>
-              </Link>
-            ))
+            <div className='flex flex-wrap w-full justify-between gap-4 gap-y-8'>
+              {moviesLetter.map((movie, i) => (
+                <Link
+                  key={i}
+                  to={`/library/title/${movie.title}/${movie.mal_id}`}
+                >
+                  <div className='border max-w-[300px]'>
+                    {<Card movie={movie} />}
+                  </div>
+                </Link>
+              ))}
+            </div>
           )}
+          <div className='w-full flex justify-center'>
+            <Pagination />
+          </div>
         </div>
       </div>
     </div>
