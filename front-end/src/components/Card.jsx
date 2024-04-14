@@ -33,7 +33,7 @@ export default function Card({ movie, type = "normal" }) {
         setDate("Unknown");
       }
     }
-  }, []);
+  }, [type, movie.aired.from]);
   const [toggle, setToggle] = useState(false);
   return (
     <div
