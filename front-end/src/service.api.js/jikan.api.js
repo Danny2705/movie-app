@@ -37,7 +37,7 @@ export const getAnimeByGenres = async (genre_id) => {
 
 export const searchAnime = async (searchPrompt) => {
   try {
-    const { data } = await axios.get(url, { params: { q: searchPrompt } });
+    const { data } = await axios.get(url + `?q=${searchPrompt}&order_by=popularity`);
     return data;
   } catch (err) {
     throw new Error(err.message);

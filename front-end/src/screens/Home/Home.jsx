@@ -34,8 +34,8 @@ export default function Home({ scroll }) {
   const embeddedUrl = selectedMovie.video.replace("watch?v=", "embed/");
 
   return (
-    <div className='home'>
-      <Navbar scroll={scroll} />
+    <div className='home' >
+      <Navbar scroll={scroll}/>
       <div className='movie'>
         <img
           src={backgroundImage}
