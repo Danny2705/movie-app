@@ -111,7 +111,9 @@ export const getAnimeStaff = async (anime_id) => {
 
 export const getAnimePagination = async (page_number) => {
   try {
-    const { data } = await axios.get(url + `?page=${page_number}`);
+    const { data } = await axios.get(
+      url + `?page=${page_number}&order_by=popularity`
+    );
     return data;
   } catch (error) {
     throw new Error(error.message);

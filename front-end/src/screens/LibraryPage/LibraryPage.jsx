@@ -42,7 +42,6 @@ export default function LibraryPage() {
   const handleBtnClick = async (letter) => {
     setSelectBtn(letter);
     const data = await getAnimeByLetter(letter);
-    console.log(data.data);
     setMoviesLetter(data.data);
 
     navigate(`/library/${letter}`);
@@ -112,7 +111,7 @@ export default function LibraryPage() {
             </div>
           )}
           <div className='w-full flex justify-center'>
-            <Pagination />
+            <Pagination setMoviesLetter={setMoviesLetter} />
           </div>
         </div>
       </div>
