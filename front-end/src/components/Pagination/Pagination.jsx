@@ -4,10 +4,14 @@ import { getAnimePagination } from "../../service.api.js/jikan.api";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 
-export default function Pagination({ selectedLetter, setMoviesLetter }) {
-  const [totalPage, setTotalPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-
+export default function Pagination({
+  selectedLetter,
+  setMoviesLetter,
+  totalPage,
+  setTotalPage,
+  currentPage,
+  setCurrentPage,
+}) {
   useEffect(() => {
     const fetchPagination = async () => {
       try {

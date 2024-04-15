@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Layout from "./screens/Layout/Layout";
 import MovieInfo from "./screens/MovieInfo/MovieInfo";
 import CharacterPage from "./screens/CharacterPage/CharacterPage";
+import NoMatch from "./screens/NoMatch/NoMatch";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/character' element={<CharacterPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='*' element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
   );
