@@ -50,7 +50,6 @@ export default function LibraryPage() {
   const handleShowAll = async () => {
     const data = await getAllAnime();
     setSelectBtn("Show All");
-
     setMoviesLetter(data.data);
     navigate(`/library/ShowAll`);
   };
@@ -111,7 +110,11 @@ export default function LibraryPage() {
             </div>
           )}
           <div className='w-full flex justify-center'>
-            <Pagination setMoviesLetter={setMoviesLetter} />
+            <Pagination
+              itemsPerPage={25}
+              setMoviesLetter={setMoviesLetter}
+              selectedLetter={selectBtn}
+            />
           </div>
         </div>
       </div>

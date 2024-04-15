@@ -1,77 +1,77 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { getAnimePagination } from "../../service.api.js/jikan.api";
+import { FcPrevious } from "react-icons/fc";
+import { FcNext } from "react-icons/fc";
 
-export default function Pagination({ setMoviesLetter }) {
+export default function Pagination({
+  itemsPerPage,
+  selectedLetter,
+  setMoviesLetter,
+}) {
+  const [itemOffset, setItemOffset] = useState(0);
+  const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [previous, setPrevious] = useState(false);
-  const [next, setNext] = useState(false);
-  const [displayedPages, setDisplayedPages] = useState([]);
-  console.log(displayedPages);
+  const [scroll, setScroll] = useState(0);
+
   useEffect(() => {
-    const fetchAnime = async (page) => {
+    const fetchPagination = async () => {
       try {
-        const data = await getAnimePagination(page);
-        setMoviesLetter(data.data);
-        setPrevious(data.previous);
-        setNext(data.next);
+        let pageNumber;
+        if (selectedLetter === "Show All") {
+          pageNumber = await getAnimePagination(1, "");
+        } else {
+          pageNumber = await getAnimePagination(1, selectedLetter);
+        }
+        setTotalPage(pageNumber.pagination.last_visible_page);
+        setCurrentPage(1);
       } catch (error) {
-        console.error("Error fetching anime:", error);
+        console.error("Error fetching pagination:", error);
       }
     };
-    fetchAnime(currentPage);
-  }, [currentPage]);
+    fetchPagination();
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY);
+    });
+    return () => {
+      window.removeEventListener("scroll", () => {
+        setScroll(window.scrollY);
+      });
+    };
+  }, [selectedLetter]);
 
-  useEffect(() => {
-    setDisplayedPages(generatePageNumbers());
-  }, [currentPage]);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleNextButtonClick = () => {
-    setDisplayedPages(generatePageNumbers(Math.max(currentPage + 5, 1)));
-  };
-
-  const handlePreviousButtonClick = () => {
-    setDisplayedPages(generatePageNumbers(Math.max(currentPage - 5, 1)));
-  };
-
-  const generatePageNumbers = (startPage = currentPage) => {
-    const start = Math.max(1, startPage);
-    const end = Math.min(start + 4, 25);
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  const handlePageClick = async (event) => {
+    try {
+      const newPageNumber = event.selected + 1;
+      let response;
+      if (selectedLetter === "Show All") {
+        response = await getAnimePagination(newPageNumber, "");
+      } else {
+        response = await getAnimePagination(newPageNumber, selectedLetter);
+      }
+      setMoviesLetter(response.data);
+      setItemOffset(event.selected * itemsPerPage);
+      setCurrentPage(newPageNumber);
+    } catch (error) {
+      console.error("Error handling page click:", error);
+    }
   };
 
   return (
-    <div>
-      <div className='flex gap-4 text-lg'>
-        <button
-          onClick={handlePreviousButtonClick}
-          className='py-1 px-2 bg-main-red'
-        >
-          Previous
-        </button>
-
-        {displayedPages.map((page, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(page)}
-            className={`${
-              currentPage === page ? "active" : ""
-            } py-1 px-2 bg-slate-900`}
-          >
-            {page}
-          </button>
-        ))}
-
-        <button
-          onClick={handleNextButtonClick}
-          className='py-1 px-2 bg-main-red'
-        >
-          Next
-        </button>
-      </div>
-    </div>
+    <>
+      <ReactPaginate
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        activeClassName={"pagination-active"}
+        onPageChange={handlePageClick}
+        pageCount={totalPage}
+        forcePage={currentPage - 1}
+        breakLabel='...'
+        previousLabel={<FcPrevious />}
+        previousClassName='bg-slate-900 p-2 rounded-full'
+        nextLabel={<FcNext />}
+        nextClassName='bg-slate-900 p-2 rounded-full'
+      />
+    </>
   );
 }

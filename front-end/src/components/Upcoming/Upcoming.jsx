@@ -9,7 +9,6 @@ export default function Upcoming() {
     const fetchAnimes = async () => {
       const data = await getUpcomingAnime();
       setMovies(data.data);
-      console.log(data.data);
     };
     fetchAnimes();
   }, []);

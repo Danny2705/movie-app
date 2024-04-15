@@ -17,7 +17,6 @@ export const getUpcomingAnime = async () => {
     const { data } = await axios.get(
       url + "?order_by=popularity&status=upcoming"
     );
-    console.log(data);
     return data;
   } catch (err) {
     throw new Error(err.message);
@@ -37,7 +36,9 @@ export const getAnimeByGenres = async (genre_id) => {
 
 export const searchAnime = async (searchPrompt) => {
   try {
-    const { data } = await axios.get(url + `?q=${searchPrompt}&order_by=popularity`);
+    const { data } = await axios.get(
+      url + `?q=${searchPrompt}&order_by=popularity`
+    );
     return data;
   } catch (err) {
     throw new Error(err.message);
@@ -109,10 +110,10 @@ export const getAnimeStaff = async (anime_id) => {
   }
 };
 
-export const getAnimePagination = async (page_number) => {
+export const getAnimePagination = async (page_number, letter) => {
   try {
     const { data } = await axios.get(
-      url + `?page=${page_number}&order_by=popularity`
+      url + `?page=${page_number}&letter=${letter}&order_by=popularity`
     );
     return data;
   } catch (error) {

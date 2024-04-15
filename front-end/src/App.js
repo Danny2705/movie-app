@@ -30,7 +30,6 @@ function App() {
         <Route path='/library' element={<Navigate to='/library/ShowAll' />} />
         <Route path='/library/:letter' element={<LibraryPage />} />
         <Route path='/library/title/:title/:id' element={<MovieInfo />} />
-        <Route path='/library/page/:page_number' element={<MovieInfo />} />
         <Route path='/trend' element={<TrendPage />} />
         <Route path='/character' element={<CharacterPage />} />
         <Route path='/login' element={<Login />} />
