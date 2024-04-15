@@ -4,15 +4,9 @@ import { getAnimePagination } from "../../service.api.js/jikan.api";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 
-export default function Pagination({
-  itemsPerPage,
-  selectedLetter,
-  setMoviesLetter,
-}) {
-  const [itemOffset, setItemOffset] = useState(0);
+export default function Pagination({ selectedLetter, setMoviesLetter }) {
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
     const fetchPagination = async () => {
@@ -30,14 +24,6 @@ export default function Pagination({
       }
     };
     fetchPagination();
-    window.addEventListener("scroll", () => {
-      setScroll(window.scrollY);
-    });
-    return () => {
-      window.removeEventListener("scroll", () => {
-        setScroll(window.scrollY);
-      });
-    };
   }, [selectedLetter]);
 
   const handlePageClick = async (event) => {
@@ -50,8 +36,8 @@ export default function Pagination({
         response = await getAnimePagination(newPageNumber, selectedLetter);
       }
       setMoviesLetter(response.data);
-      setItemOffset(event.selected * itemsPerPage);
       setCurrentPage(newPageNumber);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Error handling page click:", error);
     }

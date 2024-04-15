@@ -58,17 +58,19 @@ export default function LibraryPage() {
     <div className='px-[100px] min-h-[100vh] py-20'>
       <Navbar scroll={scroll} />
       <div className='mt-[80px] flex flex-col gap-4'>
-        <h4 className='text-[13px] cursor-pointer w-fit'>
-          <Link to='/' className='hover:text-[grey] duration-500'>
-            Home
-          </Link>{" "}
-          / <span className='hover:text-[grey] duration-500'>A - Z list</span> /{" "}
-          <span className='hover:text-[grey] duration-500'>{selectBtn}</span>
-        </h4>
-
-        <h1 className='bg-main-red w-fit px-2 py-1 text-lg rounded-t-md'>
-          Anime Library
-        </h1>
+        <div>
+          <h4 className='text-[13px] cursor-pointer w-fit'>
+            <Link to='/' className='hover:text-[grey] duration-500'>
+              Home
+            </Link>{" "}
+            / <span className='hover:text-[grey] duration-500'>A - Z list</span>{" "}
+            /{" "}
+            <span className='hover:text-[grey] duration-500'>{selectBtn}</span>
+          </h4>
+          <h1 className='bg-main-red w-fit px-2 py-1 text-lg rounded-t-md'>
+            Anime Library
+          </h1>
+        </div>
 
         <div className='flex items-center w-full justify-between flex-wrap gap-2'>
           <button
@@ -111,7 +113,6 @@ export default function LibraryPage() {
           )}
           <div className='w-full flex justify-center'>
             <Pagination
-              itemsPerPage={25}
               setMoviesLetter={setMoviesLetter}
               selectedLetter={selectBtn}
             />
