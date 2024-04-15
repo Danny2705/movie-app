@@ -25,7 +25,7 @@ export default function Search() {
 
   const handleBtnClick = async () => {
     const prompt = document.querySelector('input[type="text"]').value;
-    if (prompt.trim() !== '') {
+    if (prompt.trim() !== null) {
       const data = await searchAnime(prompt);
       navigate("/search", {state: {searchData: data.data}});
     }
@@ -71,12 +71,12 @@ export default function Search() {
 								</div>
 							)
 					)}
-					{input ? <button
+					<button
 						onClick={handleBtnClick}
 						className="flex w-full bg-main-red text-center items-center justify-center py-1"
 					>
 						Click to See More...
-					</button> : ''}
+					</button>
 				</div>
 			)}
 		</div>
