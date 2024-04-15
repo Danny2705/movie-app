@@ -5,13 +5,26 @@ import { getAllAnime, getAnimeByLetter } from "../../service.api.js/jikan.api";
 import Card from "../../components/Card";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
+import { useHistory } from "react-router-use-history";
 
 export default function LibraryPage() {
   const [scroll, setScroll] = useState(0);
   const [selectBtn, setSelectBtn] = useState("Show All");
+  const [totalPage, setTotalPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [moviesLetter, setMoviesLetter] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    // Check if the query parameter exists
+    if (currentPage > 0) {
+      // Modify the current route to include the query parameter
+      const newLocation = location.pathname + `?page=${currentPage}`;
+      history.replace(newLocation);
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -115,6 +128,10 @@ export default function LibraryPage() {
             <Pagination
               setMoviesLetter={setMoviesLetter}
               selectedLetter={selectBtn}
+              totalPage={totalPage}
+              setTotalPage={setTotalPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         </div>
