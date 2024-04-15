@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Layout from "./screens/Layout/Layout";
 import MovieInfo from "./screens/MovieInfo/MovieInfo";
 import CharacterPage from "./screens/CharacterPage/CharacterPage";
+import SearchPage from "./screens/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       />
       <Routes>
         <Route path='/' element={<Layout />} />
+        <Route path='/search' element={<SearchPage />} />
         <Route path='/library' element={<Navigate to='/library/ShowAll' />} />
         <Route path='/library/:letter' element={<LibraryPage />} />
         <Route path='/library/title/:title/:id' element={<MovieInfo />} />
