@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   letter: "Show All",
+  searchPrompt: ""
 };
 
 const contentSlice = createSlice({
@@ -11,9 +12,12 @@ const contentSlice = createSlice({
     setLibraryRoute: (state, action) => {
       state.letter = action.payload;
     },
+    setSearchPrompt: (state, action) => {
+      state.searchPrompt = action.payload
+    }
   },
 });
 
-export const { setLibraryRoute } = contentSlice.actions;
+export const { setLibraryRoute, setSearchPrompt } = contentSlice.actions;
 
 export default contentSlice.reducer;

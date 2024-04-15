@@ -3,12 +3,16 @@ import { CiSearch } from 'react-icons/ci';
 import searchData from '../../data/searchData.json';
 import { Link, useNavigate } from 'react-router-dom';
 import { searchAnime } from '../../service.api.js/jikan.api';
+import { setSearchPrompt } from '../../redux/contentSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Search() {
 	const [movieList, setMovieList] = useState([...searchData]);
 	const [showMovies, setShowMovies] = useState(false);
-  const [input, setInput] = useState('')
-  const navigate = useNavigate()
+	const [input, setInput] = useState('');
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const searchPrompt = useSelector((state) => state.content.searchPrompt);
 
 	const search = async (prompt) => {
 		if (prompt === null) return;
@@ -23,14 +27,10 @@ export default function Search() {
 		}, 150);
 	};
 
-  const handleBtnClick = async () => {
-    const prompt = document.querySelector('input[type="text"]').value;
-    if (prompt.trim() !== null) {
-      const data = await searchAnime(prompt);
-      navigate("/search", {state: {searchData: data.data}});
-    }
-  }
-  
+	const handleBtnClick = () => {
+		navigate('/search');
+	};
+
 	return (
 		<div>
 			<div className="flex items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-sm w-[250px]">
@@ -41,8 +41,11 @@ export default function Search() {
 					placeholder="Search"
 					onFocus={() => setShowMovies(true)}
 					onBlur={handleInputBlur}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+					value={input}
+					onChange={(e) => {
+						dispatch(setSearchPrompt(e.target.value));
+						setInput(e.target.value);
+					}}
 					onKeyDown={(e) => {
 						e.key === 'Enter' && search(e.target.value);
 					}}

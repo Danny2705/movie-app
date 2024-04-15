@@ -1,12 +1,13 @@
 import React from "react";
 import Search from "../Search/Search";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Personal from "../Personal/Personal";
 
 export default function Navbar({ scroll }) {
   const user = useSelector((state) => state.auth.user);
+  const location = useLocation()
 
   return (
     <div
@@ -44,7 +45,7 @@ export default function Navbar({ scroll }) {
       </div>
 
       {/* Search bar */}
-      <Search  />
+      {location.pathname !== '/search' ? <Search  />: <div/>}
 
       {/* Log In Button */}
       {!user ? (
