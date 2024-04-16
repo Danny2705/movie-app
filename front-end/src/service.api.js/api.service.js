@@ -27,3 +27,37 @@ export const login = async (user) => {
       return error;
     });
 };
+
+export const postComment = async (postData) => {
+  return await httpClient
+    .post(`/review`, postData)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getComments = async (movie) => {
+  return await httpClient
+    .get("/review", movie)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getCommentsByMovieId = async (movieId) => {
+  return await httpClient
+    .get(`/review/${movieId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
