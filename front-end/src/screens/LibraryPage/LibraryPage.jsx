@@ -24,7 +24,7 @@ export default function LibraryPage() {
       const newLocation = location.pathname + `?page=${currentPage}`;
       history.replace(newLocation);
     }
-  }, [currentPage]);
+  }, [currentPage, location.pathname]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {

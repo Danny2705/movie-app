@@ -8,9 +8,8 @@ import { renderMovie } from "./renderMovie";
 
 const lists = ["Movie Detail", "Character", "Trailer", "Image", "Staff"];
 
-export default function MovieDetail({ info }) {
+export default function MovieDetail({ info, selected, setSelected }) {
   const [detail, setDetail] = useState([]);
-  const [selected, setSelected] = useState("Movie Detail");
 
   const handleBtnClick = async (id) => {
     if (id === "Character") {

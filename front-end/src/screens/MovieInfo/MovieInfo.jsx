@@ -11,6 +11,7 @@ export default function MovieInfo() {
   const params = useParams();
   const [scroll, setScroll] = useState(0);
   const [animeInfo, setAnimeInfo] = useState([]);
+  const [selected, setSelected] = useState("Movie Detail");
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -84,12 +85,16 @@ export default function MovieInfo() {
                 </div>
               </div>
               <div>
-                <MovieDetail info={animeInfo} />
+                <MovieDetail
+                  info={animeInfo}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
               </div>
             </div>
             <div className='flex-1'>
               <div className='flex items-start bg-[#0f1416] justify-center'>
-                <RightMovie id={params.id} />
+                <RightMovie id={params.id} setSelected={setSelected} />
               </div>
             </div>
           </div>

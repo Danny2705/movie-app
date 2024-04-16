@@ -128,7 +128,7 @@ export const renderMovie = (selected, info, detail) => {
   } else if (selected === "Character" && detail) {
     return (
       <div className=''>
-        <div className='flex min-h-[100vh] flex-wrap justify-between mt-4 gap-2 max-w-[1000px]'>
+        <div className='flex max-h-[100vh] flex-wrap justify-between mt-4 gap-2 max-w-full'>
           {detail.map((character, i) => (
             <div key={i}>
               <div className='w-[200px] h-[330px] relative '>
@@ -155,19 +155,18 @@ export const renderMovie = (selected, info, detail) => {
           <div className='text-xl'>No Trailer</div>
         ) : (
           <iframe
-            width='760'
             height='515'
             src={info.trailer.embed_url}
             title='YouTube video player'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-            className='z-10'
+            className='z-10 w-full'
           ></iframe>
         )}
       </div>
     );
   } else if (selected === "Image") {
     return (
-      <div className='mt-4 w-full flex flex-wrap gap-4 max-w-[1000px]'>
+      <div className='mt-4 w-full flex flex-wrap gap-4 max-w-full'>
         {detail.map((pic, index) => (
           <div key={index}>
             <div className='w-[200px] h-[330px]'>
@@ -184,7 +183,7 @@ export const renderMovie = (selected, info, detail) => {
   } else if (selected === "Staff") {
     return (
       <div className=''>
-        <div className='flex min-h-[100vh] flex-wrap justify-between mt-4 gap-4 max-w-[1000px]'>
+        <div className='flex min-h-[100vh] flex-wrap justify-between mt-4 gap-4 max-w-full'>
           {detail.map((staff, i) => (
             <div key={i}>
               <div className='w-[200px] h-[330px] relative '>
