@@ -35,7 +35,7 @@ export default function LibraryPage() {
         setScroll(window.scrollY);
       });
     };
-  }, [scroll]);
+  }, []);
 
   useEffect(() => {
     const fetchAnimes = async () => {

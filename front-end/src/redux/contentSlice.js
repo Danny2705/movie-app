@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   letter: "Show All",
-  searchPrompt: ""
+  searchPrompt: "",
 };
 
 const contentSlice = createSlice({
@@ -13,8 +13,8 @@ const contentSlice = createSlice({
       state.letter = action.payload;
     },
     setSearchPrompt: (state, action) => {
-      state.searchPrompt = action.payload
-    }
+      state.searchPrompt = action.payload;
+    },
   },
 });
 

@@ -13,9 +13,9 @@ export default function Review() {
   const [comment, setComment] = useState("");
   const [commentData, setCommentData] = useState([]);
   const [rating, setRating] = useState(0);
+  const [visibleComments, setVisibleComments] = useState(10);
   const user = useSelector((state) => state.auth.user);
   const params = useParams();
-
   /*
   userId = user in redux
   rating 
@@ -25,6 +25,7 @@ export default function Review() {
 
   const handlePost = async (e) => {
     e.preventDefault();
+
     if (user.name) {
       const postData = {
         userId: user._id,
@@ -41,17 +42,23 @@ export default function Review() {
 
   const fetchComments = async () => {
     const data = await getCommentsByMovieId(params.id);
-    console.log(data);
     setCommentData(data);
   };
 
   useEffect(() => {
     fetchComments();
-  }, [params]);
+  }, [params, user]);
+
+  const handleShowMore = () => {
+    setVisibleComments(visibleComments + 10);
+  };
+
   return (
     <div className='mt-8 bg-main-black w-full min-h-[100vh] px-10 py-4 flex flex-col gap-6'>
       <div className='flex items-center w-full justify-between border-b border-[grey] pb-4'>
-        <h1 className='font-bold text-main-red text-lg'>1000 Reviews</h1>
+        <h1 className='font-bold text-main-red text-lg'>
+          {commentData.length} Reviews
+        </h1>
         <button>Sort by</button>
       </div>
 
@@ -103,9 +110,20 @@ export default function Review() {
 
       <div>
         {commentData.length > 0 &&
-          commentData?.map((com) => (
-            <ReviewCard key={com._id} com={com} date={com.createdAt} />
-          ))}
+          commentData
+            .slice(0, visibleComments)
+            .map((com) => (
+              <ReviewCard key={com._id} com={com} date={com.createdAt} />
+            ))}
+
+        {commentData.length > visibleComments && (
+          <button
+            onClick={handleShowMore}
+            className='w-full bg-main-red py-2 mt-4 hover:bg-main-redHover'
+          >
+            Show More
+          </button>
+        )}
       </div>
     </div>
   );

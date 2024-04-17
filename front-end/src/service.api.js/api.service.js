@@ -32,7 +32,6 @@ export const postComment = async (postData) => {
   return await httpClient
     .post(`/review`, postData)
     .then((response) => {
-      console.log(response.data);
       return response.data;
     })
     .catch((error) => {
@@ -56,6 +55,19 @@ export const getCommentsByMovieId = async (movieId) => {
     .get(`/review/${movieId}`)
     .then((response) => {
       return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const postLikeComment = async (commentId, userId) => {
+  const data = { commentId, userId };
+  return await httpClient
+    .post(`/review/like-comments`, data)
+    .then((response) => {
+      console.log(response);
+      return response;
     })
     .catch((error) => {
       console.log(error);

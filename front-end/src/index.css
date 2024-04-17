@@ -208,19 +208,6 @@ main::before {
   width: 100%;
 }
 
-@media screen and (max-width: 1000px) {
-  .navbar {
-    padding: 30px 50px;
-  }
-  .home .movie {
-    padding: 0 50px;
-    padding-bottom: 100px;
-  }
-  .home .vid-player {
-    padding: 0.75rem;
-  }
-}
-
 .pagination {
   list-style: none;
   height: 31.5px;
@@ -248,4 +235,21 @@ main::before {
   justify-content: center;
   align-items: center;
   margin-top: 2px;
+}
+
+.css-kz3ofu-MuiRating-root .css-34he1w-MuiRating-decimal {
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .navbar {
+    padding: 30px 50px;
+  }
+  .home .movie {
+    padding: 0 50px;
+    padding-bottom: 100px;
+  }
+  .home .vid-player {
+    padding: 0.75rem;
+  }
 }

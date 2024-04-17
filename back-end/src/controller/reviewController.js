@@ -1,4 +1,5 @@
 const Review = require("../model/reviewModel");
+const User = require("../model/userModel");
 
 const postReview = async (req, res) => {
   try {
@@ -12,6 +13,7 @@ const postReview = async (req, res) => {
       isAnonymous,
       parentReview,
       movieId,
+      likeAmount: 0,
     });
     res.status(200).json(review);
   } catch (error) {
@@ -45,6 +47,11 @@ const getReviewByMovieId = async (req, res) => {
         },
       },
       {
+        $project: {
+          "user.password": 0,
+        },
+      },
+      {
         $sort: { createdAt: -1 },
       },
     ]);
@@ -53,6 +60,33 @@ const getReviewByMovieId = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
     console.log(error);
+  }
+};
+
+const likeComment = async (req, res) => {
+  try {
+    const { commentId, userId } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const comment = await Review.findById(commentId);
+    const index = user.likedComment.indexOf(commentId);
+    if (index === -1) {
+      user.likedComment.push(commentId);
+      comment.likeAmount++;
+    } else {
+      user.likedComment.splice(index, 1);
+      comment.likeAmount--;
+    }
+    await user.save();
+    await comment.save();
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error("Error liking/unliking comment:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -91,4 +125,5 @@ module.exports = {
   getReviewByMovieId,
   updateReviewById,
   deleteReview,
+  likeComment,
 };

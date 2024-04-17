@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         main: {
           red: "#dc143c",
+          redHover: "#da3354",
           activate: "#da3354",
           banana: "#b5e745",
           black: "#0f1416",

@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   history: { type: String },
   watchlist: { type: String },
+  likedComment: [{ type: String }],
 });
 
 const User = mongoose.model("User", userSchema);

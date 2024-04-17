@@ -8,6 +8,7 @@ const reviewSchema = new mongoose.Schema(
     comment: { type: String },
     isAnonymous: { type: Boolean },
     parentReview: { type: mongoose.Schema.Types.ObjectId, ref: "reviews" },
+    likeAmount: { type: Number },
   },
   { timestamps: true }
 );

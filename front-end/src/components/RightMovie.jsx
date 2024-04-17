@@ -14,7 +14,7 @@ export default function RightMovie({ id, setSelected }) {
       setSelected("Movie Detail");
     };
     fetchAnimeId();
-  }, [id]);
+  }, [id, setSelected]);
 
   const handleShowMore = () => {
     setDisplayCount((prevCount) => prevCount + 20);

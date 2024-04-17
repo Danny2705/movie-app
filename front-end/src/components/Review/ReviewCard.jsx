@@ -1,14 +1,14 @@
 import { Rating } from "@mui/material";
-import React from "react";
-
-const formatDate = (date) => {
-  const fromDate = new Date(date);
-  return `${
-    fromDate.getHours() >= 0 ? fromDate.getHours() : 12 + fromDate.getHours()
-  }:${fromDate.getMinutes().toString().padStart(2, "0")} ${
-    fromDate.getHours() >= 0 && fromDate.getHours() < 12 ? "AM" : "PM"
-  }`;
-};
+import React, { useEffect, useState } from "react";
+import { AiFillLike } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  likeComment,
+  unlikeComment,
+  resetComment,
+} from "../../redux/likeSlice";
+import { postLikeComment } from "../../service.api.js/api.service";
+import { updateUser } from "../../redux/authSlice";
 
 const getElapsedTime = (date) => {
   const elapsedMilliseconds = Date.now() - new Date(date).getTime();
@@ -45,8 +45,32 @@ const getElapsedTime = (date) => {
 };
 
 const ReviewCard = ({ com }) => {
-  const formattedDate = formatDate(com.createdAt);
+  const dispatch = useDispatch();
   const elapsedTime = getElapsedTime(com.createdAt);
+  const [isLike, setIsLike] = useState(false);
+  const [replyComment, setReplyComment] = useState("");
+  const user = useSelector((state) => state.auth.user);
+
+  const handleLike = async () => {
+    if (!isLike) {
+      const data = await postLikeComment(com._id, user._id);
+      dispatch(updateUser(data.data.user));
+      setIsLike(true);
+    }
+  };
+
+  const handleUnlike = async () => {
+    if (isLike) {
+      const data = await postLikeComment(com._id, user._id);
+      dispatch(updateUser(data.data.user));
+      setIsLike(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!user) return;
+    setIsLike(user.likedComment?.find((l) => l === com._id));
+  }, [user, com._id]);
 
   return (
     <div className='flex w-full mt-8 items-start justify-start'>
@@ -57,10 +81,9 @@ const ReviewCard = ({ com }) => {
           className='w-[70px] h-[70px] border rounded-full'
         />
       </div>
-
       <div className='w-full flex flex-col'>
         <div className='flex justify-between w-full'>
-          <h1 className='font-bold font-josefin text-[#1569D6] h-fit'>
+          <h1 className='font-josefin text-[#FF4500] text-[17px] h-fit'>
             {com.user[0].name}
           </h1>
           <div>
@@ -77,13 +100,55 @@ const ReviewCard = ({ com }) => {
             />
           </div>
         </div>
-        <p className='text-main-banana mb-2'>{com.comment}</p>
+        <p className='mb-2 text-sm'>{com.comment}</p>
         <div className='flex items-center gap-4 justify-between'>
           <div className='flex items-center gap-4'>
-            <button className='text-main-red'>Like</button>
-            <button className='text-main-red'>Reply</button>
+            {!isLike ? (
+              <button
+                onClick={handleLike}
+                className={`flex items-center gap-1 text-[12px]`}
+              >
+                <AiFillLike
+                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
+                />
+                <span
+                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
+                >
+                  Like
+                </span>
+              </button>
+            ) : (
+              <button
+                onClick={handleUnlike}
+                className={`flex items-center gap-1 text-[12px]`}
+              >
+                <AiFillLike
+                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
+                />
+                <span
+                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
+                >
+                  Unlike
+                </span>
+              </button>
+            )}
+
+            <button className='text-main-red text-[12px]'>Reply</button>
+
+            <span className='text-[12px]'>
+              {com.likeAmount > 0 ? (
+                <div className='flex items-center gap-1'>
+                  <div className='rounded-full text-[10px] bg-blue-600'>
+                    <AiFillLike />
+                  </div>
+                  {com.likeAmount}
+                </div>
+              ) : (
+                ""
+              )}
+            </span>
           </div>
-          <span className='text-sm italic'>{elapsedTime}</span>
+          <span className='text-[12px] italic'>{elapsedTime}</span>
         </div>
       </div>
     </div>
