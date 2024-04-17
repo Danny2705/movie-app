@@ -9,6 +9,7 @@ import {
 } from "../../redux/likeSlice";
 import { postLikeComment } from "../../service.api.js/api.service";
 import { updateUser } from "../../redux/authSlice";
+import toast from "react-hot-toast";
 
 const getElapsedTime = (date) => {
   const elapsedMilliseconds = Date.now() - new Date(date).getTime();
@@ -52,10 +53,14 @@ const ReviewCard = ({ com }) => {
   const user = useSelector((state) => state.auth.user);
 
   const handleLike = async () => {
-    if (!isLike) {
-      const data = await postLikeComment(com._id, user._id);
-      dispatch(updateUser(data.data.user));
-      setIsLike(true);
+    if (user) {
+      if (!isLike) {
+        const data = await postLikeComment(com._id, user._id);
+        dispatch(updateUser(data.data.user));
+        setIsLike(true);
+      }
+    } else {
+      toast.error("You should login to like a comment");
     }
   };
 
