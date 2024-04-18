@@ -6,6 +6,7 @@ import { getAnimeById } from "../../service.api.js/jikan.api";
 import View from "../../components/View";
 import RightMovie from "../../components/RightMovie";
 import MovieDetail from "../../components/MovieDetail/MovieDetail";
+import BackToTopBtn from "../../components/Navbar/BackToTopBtn";
 
 export default function MovieInfo() {
   const params = useParams();
@@ -100,6 +101,7 @@ export default function MovieInfo() {
           </div>
         )}
       </div>
+      <BackToTopBtn scroll={scroll} />
     </div>
   );
 }

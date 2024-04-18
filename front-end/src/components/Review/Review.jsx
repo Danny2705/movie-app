@@ -52,7 +52,6 @@ export default function Review() {
 
   const fetchComments = async () => {
     const data = await getCommentsByMovieId(params.id);
-    console.log(data);
     setCommentData(data);
   };
 

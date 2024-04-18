@@ -24,7 +24,6 @@ export default function Login() {
       }
 
       const response = await login(userCredential);
-      console.log(response);
       if (response.data) {
         toast.success("Login successfully");
         dispatch(logIn({ user: response.data, token: response.token }));

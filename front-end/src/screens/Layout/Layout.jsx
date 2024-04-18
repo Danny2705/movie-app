@@ -3,6 +3,7 @@ import Home from "../Home/Home";
 import Popular from "../../components/Popular/Popular";
 import Upcoming from "../../components/Upcoming/Upcoming";
 import Footer from "../../components/Footer/Footer";
+import BackToTopBtn from "../../components/Navbar/BackToTopBtn";
 
 export default function Layout() {
   const [scroll, setScroll] = useState(0);
@@ -25,6 +26,7 @@ export default function Layout() {
       <Popular />
       <Upcoming />
       <Footer />
+      <BackToTopBtn scroll={scroll} />
     </div>
   );
 }

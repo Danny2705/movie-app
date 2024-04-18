@@ -52,11 +52,10 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
 
   const fiveMinutes = 300000;
   const timePassed = new Date() - new Date(com.createdAt) > fiveMinutes;
-  const canReply = Boolean(user._id);
-  const canEdit = (user._id === com._id) & !timePassed;
-  const canDelete = (user._id === com._id) & !timePassed;
+  const canReply = Boolean(user?._id);
+  const canEdit = (user?._id === com._id) & !timePassed;
+  const canDelete = (user?._id === com._id) & !timePassed;
 
-  console.log(com);
   const handleLike = async () => {
     if (user) {
       if (!isLike) {
@@ -84,7 +83,7 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
   const handlePostReply = async (e) => {
     e.preventDefault();
     const postData = {
-      userId: user._id,
+      userId: user?._id,
       anonymous: !user,
       rating: null,
       comment: replyComment,
@@ -114,7 +113,7 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
       <div className='w-full flex flex-col'>
         <div className='flex justify-between w-full'>
           <h1 className='font-josefin text-[#FF4500] text-[17px] h-fit'>
-            {com.user[0].name}
+            {com.user[0]?.name === undefined ? "Anonymous" : com.user[0]?.name}
           </h1>
           <div>
             {com.rating === null ? (
@@ -175,12 +174,16 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
                   </span>
                 </button>
               )}
-              <button
-                onClick={() => setIsReply(!isReply)}
-                className={`text-main-red text-[12px]`}
-              >
-                Reply
-              </button>
+              {com.rating === null ? (
+                ""
+              ) : (
+                <button
+                  onClick={() => setIsReply(!isReply)}
+                  className={`text-main-red text-[12px]`}
+                >
+                  Reply
+                </button>
+              )}
               <button className='text-[12px] text-[gray]'>
                 <FaEdit />
               </button>

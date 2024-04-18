@@ -10,6 +10,7 @@ import MovieInfo from "./screens/MovieInfo/MovieInfo";
 import CharacterPage from "./screens/CharacterPage/CharacterPage";
 import SearchPage from "./screens/SearchPage/SearchPage";
 import NoMatch from "./screens/NoMatch/NoMatch";
+import ProfilePage from "./screens/ProfilePage/ProfilePage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path='/character' element={<CharacterPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/profile/user/:userId' element={<ProfilePage />} />
         <Route path='*' element={<NoMatch />} />
       </Routes>
     </BrowserRouter>

@@ -241,6 +241,48 @@ main::before {
   font-size: 1.3rem;
 }
 
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 8px solid #dc143c;
+}
+
+.back-to-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  background: #dc143c;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.back-to-top .icon {
+  font-size: 1.5rem;
+  line-height: 0;
+}
+
+.back-to-top:hover {
+  background: black;
+  color: #dc143c;
+}
+
+.back-to-top.active {
+  visibility: visible;
+  opacity: 1;
+}
+
 @media screen and (max-width: 1000px) {
   .navbar {
     padding: 30px 50px;
