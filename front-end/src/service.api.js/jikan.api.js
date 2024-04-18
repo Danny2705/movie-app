@@ -45,6 +45,17 @@ export const searchAnime = async (searchPrompt) => {
   }
 };
 
+export const advanceSearchAnime = async (searchPrompt) => {
+  try {
+    const { data } = await axios.get(
+      url + `?q=${searchPrompt.q}&type=${searchPrompt.type}&genres=${searchPrompt.genres.join(',')}&status=${searchPrompt.status}&order_by=popularity`
+    );
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
 export const getAnimeByLetter = async (letter) => {
   try {
     const { data } = await axios.get(
@@ -120,3 +131,4 @@ export const getAnimePagination = async (page_number, letter) => {
     throw new Error(error.message);
   }
 };
+
