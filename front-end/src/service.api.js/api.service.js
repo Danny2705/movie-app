@@ -66,7 +66,6 @@ export const postLikeComment = async (commentId, userId) => {
   return await httpClient
     .post(`/review/like-comments`, data)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {

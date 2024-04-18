@@ -36,7 +36,7 @@ export default function RightMovie({ id, setSelected }) {
         </h2>
 
         <div>
-          {animeRelations.slice(0, displayCount).map((anime, index) => (
+          {animeRelations?.slice(0, displayCount).map((anime, index) => (
             <Link
               to={`/library/title/${anime.entry.title}/${anime.entry.mal_id}`}
               key={index}
@@ -59,7 +59,7 @@ export default function RightMovie({ id, setSelected }) {
           ))}
         </div>
 
-        {animeRelations.length > displayCount && (
+        {animeRelations?.length > displayCount && (
           <button
             className='bg-main-red px-4 py-2 text-white mt-4 rounded-md'
             onClick={handleShowMore}

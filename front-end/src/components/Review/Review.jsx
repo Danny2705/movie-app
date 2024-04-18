@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { Rating } from "@mui/material";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router";
+import FormReview from "./FormReview";
 
 export default function Review() {
   const [comment, setComment] = useState("");
@@ -33,6 +34,7 @@ export default function Review() {
         anonymous: !user,
         comment: comment,
         movieId: params.id,
+        parentReview: null,
       };
       await postComment(postData);
     }
@@ -40,8 +42,17 @@ export default function Review() {
     fetchComments();
   };
 
+  const rootComments = commentData.filter(
+    (comment) => comment.parentReview === null
+  );
+
+  const getReplies = (commentId) => {
+    return commentData.filter((comment) => comment.parentReview === commentId);
+  };
+
   const fetchComments = async () => {
     const data = await getCommentsByMovieId(params.id);
+    console.log(data);
     setCommentData(data);
   };
 
@@ -57,17 +68,17 @@ export default function Review() {
     <div className='mt-8 bg-main-black w-full min-h-[100vh] px-10 py-4 flex flex-col gap-6'>
       <div className='flex items-center w-full justify-between border-b border-[grey] pb-4'>
         <h1 className='font-bold text-main-red text-lg'>
-          {commentData.length} Reviews
+          {commentData?.length} Reviews
         </h1>
         <button>Sort by</button>
       </div>
 
       <div className='flex items-start w-full'>
-        <div className='w-[100px]'>
+        <div className='w-[70px]'>
           <img
             src='/assets/profile.png'
             alt='User Profile'
-            className='w-[70px] h-[70px] border'
+            className='w-[50px] h-[50px] border'
           />
         </div>
         <div className='w-full'>
@@ -89,34 +100,28 @@ export default function Review() {
               onChange={(e) => setRating(e.target.value)}
             />
           </button>
-          <form onSubmit={handlePost}>
-            <input
-              type='text'
-              placeholder='Write comments here ...'
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              required
-              className='w-full py-4 px-2 outline-none placeholder:text-black text-black bg-white'
-            />
-            <button
-              type='submit'
-              className='py-2 w-full bg-main-red flex px-3 justify-center'
-            >
-              <span>Post</span>
-            </button>
-          </form>
+          <FormReview
+            comment={comment}
+            setComment={setComment}
+            handlePost={handlePost}
+          />
         </div>
       </div>
 
       <div>
-        {commentData.length > 0 &&
-          commentData
+        {rootComments.length > 0 &&
+          rootComments
             .slice(0, visibleComments)
             .map((com) => (
-              <ReviewCard key={com._id} com={com} date={com.createdAt} />
+              <ReviewCard
+                key={com._id}
+                com={com}
+                fetchComments={fetchComments}
+                replies={getReplies(com._id)}
+              />
             ))}
 
-        {commentData.length > visibleComments && (
+        {rootComments.length > visibleComments && (
           <button
             onClick={handleShowMore}
             className='w-full bg-main-red py-2 mt-4 hover:bg-main-redHover'

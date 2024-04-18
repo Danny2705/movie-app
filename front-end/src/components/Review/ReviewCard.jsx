@@ -2,14 +2,11 @@ import { Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  likeComment,
-  unlikeComment,
-  resetComment,
-} from "../../redux/likeSlice";
-import { postLikeComment } from "../../service.api.js/api.service";
+import { postComment, postLikeComment } from "../../service.api.js/api.service";
 import { updateUser } from "../../redux/authSlice";
 import toast from "react-hot-toast";
+import FormReview from "./FormReview";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const getElapsedTime = (date) => {
   const elapsedMilliseconds = Date.now() - new Date(date).getTime();
@@ -45,13 +42,21 @@ const getElapsedTime = (date) => {
   }
 };
 
-const ReviewCard = ({ com }) => {
+const ReviewCard = ({ com, fetchComments, replies }) => {
   const dispatch = useDispatch();
   const elapsedTime = getElapsedTime(com.createdAt);
   const [isLike, setIsLike] = useState(false);
+  const [isReply, setIsReply] = useState(false);
   const [replyComment, setReplyComment] = useState("");
   const user = useSelector((state) => state.auth.user);
 
+  const fiveMinutes = 300000;
+  const timePassed = new Date() - new Date(com.createdAt) > fiveMinutes;
+  const canReply = Boolean(user._id);
+  const canEdit = (user._id === com._id) & !timePassed;
+  const canDelete = (user._id === com._id) & !timePassed;
+
+  console.log(com);
   const handleLike = async () => {
     if (user) {
       if (!isLike) {
@@ -65,11 +70,31 @@ const ReviewCard = ({ com }) => {
   };
 
   const handleUnlike = async () => {
-    if (isLike) {
-      const data = await postLikeComment(com._id, user._id);
-      dispatch(updateUser(data.data.user));
-      setIsLike(false);
+    if (user) {
+      if (isLike) {
+        const data = await postLikeComment(com._id, user._id);
+        dispatch(updateUser(data.data.user));
+        setIsLike(false);
+      }
+    } else {
+      toast.error("You should login to like a comment");
     }
+  };
+
+  const handlePostReply = async (e) => {
+    e.preventDefault();
+    const postData = {
+      userId: user._id,
+      anonymous: !user,
+      rating: null,
+      comment: replyComment,
+      movieId: com.movieId,
+      parentReview: com._id,
+    };
+    await postComment(postData);
+    setReplyComment("");
+    setIsReply(false);
+    fetchComments();
   };
 
   useEffect(() => {
@@ -78,12 +103,12 @@ const ReviewCard = ({ com }) => {
   }, [user, com._id]);
 
   return (
-    <div className='flex w-full mt-8 items-start justify-start'>
-      <div className='w-[100px]'>
+    <div className='flex w-full mt-6 items-start justify-start'>
+      <div className='w-[70px]'>
         <img
           src='/assets/profile.png'
           alt='User Profile'
-          className='w-[70px] h-[70px] border rounded-full'
+          className='w-[50px] h-[50px] border rounded-full'
         />
       </div>
       <div className='w-full flex flex-col'>
@@ -92,68 +117,122 @@ const ReviewCard = ({ com }) => {
             {com.user[0].name}
           </h1>
           <div>
-            <Rating
-              precision={0.5}
-              size='medium'
-              sx={{
-                "& .MuiRating-iconFilled": { color: "yellow" },
-                "& .MuiRating-iconEmpty": { color: "#6e6b6b" },
-                "& .MuiRating-iconDecimal": { color: "white" },
-              }}
-              value={Number(com.rating)}
-              readOnly={true}
-            />
+            {com.rating === null ? (
+              ""
+            ) : (
+              <Rating
+                precision={0.5}
+                size='medium'
+                sx={{
+                  "& .MuiRating-iconFilled": { color: "yellow" },
+                  "& .MuiRating-iconEmpty": { color: "#6e6b6b" },
+                  "& .MuiRating-iconDecimal": { color: "white" },
+                }}
+                value={Number(com.rating)}
+                readOnly={true}
+              />
+            )}
           </div>
         </div>
         <p className='mb-2 text-sm'>{com.comment}</p>
-        <div className='flex items-center gap-4 justify-between'>
-          <div className='flex items-center gap-4'>
-            {!isLike ? (
-              <button
-                onClick={handleLike}
-                className={`flex items-center gap-1 text-[12px]`}
-              >
-                <AiFillLike
-                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
-                />
-                <span
-                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
+        <div className='flex flex-col items-center gap-2 justify-between'>
+          <div className='flex justify-between w-full'>
+            <div className='flex items-center gap-4'>
+              {!isLike ? (
+                <button
+                  onClick={handleLike}
+                  className={`flex items-center gap-1 text-[12px]`}
                 >
-                  Like
-                </span>
-              </button>
-            ) : (
-              <button
-                onClick={handleUnlike}
-                className={`flex items-center gap-1 text-[12px]`}
-              >
-                <AiFillLike
-                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
-                />
-                <span
-                  className={`${isLike ? "text-blue-600" : "text-[#0CAFFF]"} `}
-                >
-                  Unlike
-                </span>
-              </button>
-            )}
-
-            <button className='text-main-red text-[12px]'>Reply</button>
-
-            <span className='text-[12px]'>
-              {com.likeAmount > 0 ? (
-                <div className='flex items-center gap-1'>
-                  <div className='rounded-full text-[10px] bg-blue-600'>
-                    <AiFillLike />
-                  </div>
-                  {com.likeAmount}
-                </div>
+                  <AiFillLike
+                    className={`${
+                      isLike ? "text-blue-600" : "text-[#0CAFFF]"
+                    } `}
+                  />
+                  <span
+                    className={`${
+                      isLike ? "text-blue-600" : "text-[#0CAFFF]"
+                    } `}
+                  >
+                    Like
+                  </span>
+                </button>
               ) : (
-                ""
+                <button
+                  onClick={handleUnlike}
+                  className={`flex items-center gap-1 text-[12px]`}
+                >
+                  <AiFillLike
+                    className={`${
+                      isLike ? "text-blue-600" : "text-[#0CAFFF]"
+                    } `}
+                  />
+                  <span
+                    className={`${
+                      isLike ? "text-blue-600" : "text-[#0CAFFF]"
+                    } `}
+                  >
+                    Unlike
+                  </span>
+                </button>
               )}
-            </span>
+              <button
+                onClick={() => setIsReply(!isReply)}
+                className={`text-main-red text-[12px]`}
+              >
+                Reply
+              </button>
+              <button className='text-[12px] text-[gray]'>
+                <FaEdit />
+              </button>
+              <button className='text-[12px] text-red-500'>
+                <FaTrash />
+              </button>
+              <span className='text-[12px]'>
+                {com.likeAmount > 0 ? (
+                  <div className='flex items-center gap-1'>
+                    <div className='rounded-full text-[10px] bg-blue-600'>
+                      <AiFillLike />
+                    </div>
+                    {com.likeAmount}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </span>
+            </div>
+            <span className='text-[12px] italic'>{elapsedTime}</span>
           </div>
-          <span className='text-[12px] italic'>{elapsedTime}</span>
+          <div className='w-full'>
+            {replies.length > 0 && (
+              <div>
+                {replies.map((reply, i) => (
+                  <ReviewCard
+                    key={i}
+                    com={reply}
+                    replies={[]}
+                    fetchComments={fetchComments}
+                  />
+                ))}
+              </div>
+            )}
+            {isReply && (
+              <div className='flex items-start mt-2 w-full'>
+                <div className='w-[70px]'>
+                  <img
+                    src='/assets/profile.png'
+                    alt='User Profile'
+                    className='w-[50px] h-[50px] border rounded-full'
+                  />
+                </div>
+                <FormReview
+                  text='reply'
+                  comment={replyComment}
+                  setComment={setReplyComment}
+                  handlePost={handlePostReply}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

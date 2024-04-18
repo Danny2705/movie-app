@@ -4,15 +4,18 @@ import { IoMdLogIn } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/authSlice";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export default function Personal() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
   const [select, setSelect] = useState(false);
 
   const logOut = () => {
     dispatch(logout());
     toast.success("Logout successfully");
+    navigate("/");
   };
   return (
     <div>
