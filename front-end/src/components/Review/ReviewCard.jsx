@@ -52,9 +52,9 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
 
   const fiveMinutes = 300000;
   const timePassed = new Date() - new Date(com.createdAt) > fiveMinutes;
-  const canReply = Boolean(user?._id);
-  const canEdit = (user?._id === com._id) & !timePassed;
-  const canDelete = (user?._id === com._id) & !timePassed;
+  // const canReply = Boolean(user?._id);
+  // const canEdit = (user?._id === com._id) & !timePassed;
+  // const canDelete = (user?._id === com._id) & !timePassed;
 
   const handleLike = async () => {
     if (user) {

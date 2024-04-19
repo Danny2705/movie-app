@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { getAnimePagination } from "../../service.api.js/jikan.api";
 import { FcPrevious } from "react-icons/fc";

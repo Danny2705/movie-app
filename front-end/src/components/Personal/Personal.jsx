@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BsPersonCircle } from "react-icons/bs";
 import { IoMdLogIn } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/authSlice";
@@ -55,7 +54,7 @@ export default function Personal() {
               <button>Profile</button>
             </Link>
             <button>Watch List</button>
-            <div className=' flex items-center bg-[#DC143C] hover:bg-[#da3354] cursor-pointer px-2 gap-2 duration-500'>
+            <div className=' flex items-center bg-[#DC143C] hover:bg-[#da3354] cursor-pointer px-2 gap-2 duration-500 py-1 rounded-md'>
               <span className='font-josefin' onClick={logOut}>
                 Log Out
               </span>
