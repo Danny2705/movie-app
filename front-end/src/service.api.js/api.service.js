@@ -62,6 +62,17 @@ export const updateComment = async (id, data) => {
     });
 };
 
+export const deleteComment = async (id) => {
+  return await httpClient
+    .delete(`/review/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const getComments = async (movie) => {
   return await httpClient
     .get("/review", movie)

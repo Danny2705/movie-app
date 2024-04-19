@@ -6,6 +6,7 @@ import {
   updateComment,
   postComment,
   postLikeComment,
+  deleteComment,
 } from "../../service.api.js/api.service";
 import { updateUser } from "../../redux/authSlice";
 import toast from "react-hot-toast";
@@ -46,7 +47,7 @@ const getElapsedTime = (date) => {
   }
 };
 
-const ReviewCard = ({ com, fetchComments, replies }) => {
+const ReviewCard = ({ com, fetchComments, replies, parentId = null }) => {
   const dispatch = useDispatch();
   const elapsedTime = getElapsedTime(com.createdAt);
   const [isLike, setIsLike] = useState(false);
@@ -56,13 +57,7 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
   const [editComment, setEditComment] = useState("");
   const user = useSelector((state) => state.auth.user);
 
-  console.log(com);
-
-  const fiveMinutes = 300000;
-  const timePassed = new Date() - new Date(com.createdAt) > fiveMinutes;
-  // const canReply = Boolean(user?._id);
-  // const canEdit = (user?._id === com._id) & !timePassed;
-  // const canDelete = (user?._id === com._id) & !timePassed;
+  const replyId = parentId ? parentId : com._id;
 
   const handleLike = async () => {
     if (user) {
@@ -96,7 +91,7 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
       rating: null,
       comment: replyComment,
       movieId: com.movieId,
-      parentReview: com._id,
+      parentReview: replyId,
     };
     await postComment(postData);
     setReplyComment("");
@@ -106,7 +101,6 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    setEditComment(com.comment);
     const editData = {
       userId: user?._id,
       anonymous: !user,
@@ -115,6 +109,20 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
     };
     await updateComment(com?._id, editData);
     setIsEdit(false);
+    fetchComments();
+  };
+
+  const handleClickReply = () => {
+    setIsReply(!isReply);
+    if (replyId === parentId) {
+      setReplyComment("@" + com.user[0].name + " ");
+    } else {
+      setReplyComment(replyComment);
+    }
+  };
+
+  const handleDelete = async () => {
+    await deleteComment(com?._id);
     fetchComments();
   };
 
@@ -200,16 +208,16 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
                   </span>
                 </button>
               )}
-              {com.rating === null ? (
+              {/* {com.rating === null ? (
                 ""
-              ) : (
-                <button
-                  onClick={() => setIsReply(!isReply)}
-                  className={`text-main-red text-[12px]`}
-                >
-                  Reply
-                </button>
-              )}
+              ) : ( */}
+              <button
+                onClick={handleClickReply}
+                className={`text-main-red text-[12px]`}
+              >
+                Reply
+              </button>
+              {/* )} */}
               <button
                 onClick={() => {
                   setIsEdit(!isEdit);
@@ -219,7 +227,10 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
               >
                 {user?._id === com.user[0]?._id && <FaEdit />}
               </button>
-              <button className='text-[12px] text-red-500'>
+              <button
+                onClick={handleDelete}
+                className='text-[12px] text-red-500'
+              >
                 {user?._id === com.user[0]?._id && <FaTrash />}
               </button>
               <span className='text-[12px]'>
@@ -238,16 +249,25 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
             <span className='text-[12px] italic'>{elapsedTime}</span>
           </div>
           <div className='w-full'>
-            {replies.length > 0 && (
-              <div>
-                {replies.map((reply, i) => (
-                  <ReviewCard
-                    key={i}
-                    com={reply}
-                    replies={[]}
-                    fetchComments={fetchComments}
+            {isEdit && (
+              <div className='flex items-start mt-2 w-full'>
+                <div className='w-[50px]'>
+                  <img
+                    src={
+                      user?.profilePicture
+                        ? user?.profilePicture
+                        : "/assets/profile.jpg"
+                    }
+                    alt='User Profile'
+                    className='w-[30px] h-[30px] rounded-full'
                   />
-                ))}
+                </div>
+                <FormReview
+                  text='edit'
+                  comment={editComment}
+                  setComment={setEditComment}
+                  handlePost={handleEdit}
+                />
               </div>
             )}
             {isReply && (
@@ -271,25 +291,17 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
                 />
               </div>
             )}
-            {isEdit && (
-              <div className='flex items-start mt-2 w-full'>
-                <div className='w-[50px]'>
-                  <img
-                    src={
-                      user?.profilePicture
-                        ? user?.profilePicture
-                        : "/assets/profile.jpg"
-                    }
-                    alt='User Profile'
-                    className='w-[30px] h-[30px] rounded-full'
+            {replies.length > 0 && (
+              <div>
+                {replies.map((reply, i) => (
+                  <ReviewCard
+                    key={i}
+                    com={reply}
+                    replies={[]}
+                    fetchComments={fetchComments}
+                    parentId={com._id}
                   />
-                </div>
-                <FormReview
-                  text='edit'
-                  comment={editComment}
-                  setComment={setEditComment}
-                  handlePost={handleEdit}
-                />
+                ))}
               </div>
             )}
           </div>
