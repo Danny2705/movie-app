@@ -2,7 +2,11 @@ import { Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { postComment, postLikeComment } from "../../service.api.js/api.service";
+import {
+  updateComment,
+  postComment,
+  postLikeComment,
+} from "../../service.api.js/api.service";
 import { updateUser } from "../../redux/authSlice";
 import toast from "react-hot-toast";
 import FormReview from "./FormReview";
@@ -47,8 +51,12 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
   const elapsedTime = getElapsedTime(com.createdAt);
   const [isLike, setIsLike] = useState(false);
   const [isReply, setIsReply] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [replyComment, setReplyComment] = useState("");
+  const [editComment, setEditComment] = useState("");
   const user = useSelector((state) => state.auth.user);
+
+  console.log(com);
 
   const fiveMinutes = 300000;
   const timePassed = new Date() - new Date(com.createdAt) > fiveMinutes;
@@ -93,6 +101,20 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
     await postComment(postData);
     setReplyComment("");
     setIsReply(false);
+    fetchComments();
+  };
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    setEditComment(com.comment);
+    const editData = {
+      userId: user?._id,
+      anonymous: !user,
+      comment: editComment,
+      movieId: com.movieId,
+    };
+    await updateComment(com?._id, editData);
+    setIsEdit(false);
     fetchComments();
   };
 
@@ -188,11 +210,17 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
                   Reply
                 </button>
               )}
-              <button className='text-[12px] text-[gray]'>
-                <FaEdit />
+              <button
+                onClick={() => {
+                  setIsEdit(!isEdit);
+                  setEditComment(com.comment);
+                }}
+                className='text-[12px] text-[gray]'
+              >
+                {user?._id === com.user[0]?._id && <FaEdit />}
               </button>
               <button className='text-[12px] text-red-500'>
-                <FaTrash />
+                {user?._id === com.user[0]?._id && <FaTrash />}
               </button>
               <span className='text-[12px]'>
                 {com.likeAmount > 0 ? (
@@ -240,6 +268,27 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
                   comment={replyComment}
                   setComment={setReplyComment}
                   handlePost={handlePostReply}
+                />
+              </div>
+            )}
+            {isEdit && (
+              <div className='flex items-start mt-2 w-full'>
+                <div className='w-[50px]'>
+                  <img
+                    src={
+                      user?.profilePicture
+                        ? user?.profilePicture
+                        : "/assets/profile.jpg"
+                    }
+                    alt='User Profile'
+                    className='w-[30px] h-[30px] rounded-full'
+                  />
+                </div>
+                <FormReview
+                  text='edit'
+                  comment={editComment}
+                  setComment={setEditComment}
+                  handlePost={handleEdit}
                 />
               </div>
             )}

@@ -21,6 +21,23 @@ const postReview = async (req, res) => {
   }
 };
 
+const updateReviewById = async (req, res) => {
+  try {
+    const { userId, comment, isAnonymous } = req.body;
+    const updatedReview = await Review.findByIdAndUpdate(
+      req.params.id,
+      { userId, comment, isAnonymous },
+      { new: true }
+    );
+    if (!updatedReview) {
+      return res.status(404).json({ message: "Review not found" });
+    }
+    res.json({ message: "Updated Successfully", updatedReview });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const getAllReviews = async (req, res) => {
   try {
     const review = await Review.find().sort({ createdAt: -1 });
@@ -86,23 +103,6 @@ const likeComment = async (req, res) => {
   } catch (error) {
     console.error("Error liking/unliking comment:", error);
     res.status(500).json({ error: "Internal server error" });
-  }
-};
-
-const updateReviewById = async (req, res) => {
-  try {
-    const { userId, rating, comment, isAnonymous, parentReview } = req.body;
-    const updatedReview = await Review.findByIdAndUpdate(
-      req.params.id,
-      { userId, rating, comment, isAnonymous, parentReview },
-      { new: true }
-    );
-    if (!updatedReview) {
-      return res.status(404).json({ message: "Review not found" });
-    }
-    res.json({ message: "Updated Successfully", updatedReview });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 };
 

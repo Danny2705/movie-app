@@ -5,7 +5,7 @@ const httpClient = axios.create({
 });
 
 export const signUp = async (user) => {
-  return httpClient
+  return await httpClient
     .post(`/user/signup`, user)
     .then((response) => {
       return response.data;
@@ -43,6 +43,18 @@ export const postComment = async (postData) => {
   return await httpClient
     .post(`/review`, postData)
     .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const updateComment = async (id, data) => {
+  return await httpClient
+    .put(`/review/${id}`, data)
+    .then((response) => {
+      console.log(response);
       return response.data;
     })
     .catch((error) => {
