@@ -142,7 +142,7 @@ export default function ProfilePage() {
 						)}
 						<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 							<div className="flex flex-row">
-								<div className="flex flex-col items-start justify-center w-full">
+								<div className="flex flex-col items-start justify-center w-full gap-4">
 									<label
 										htmlFor="name"
 										className="text-[#3a3e55] text-sm font-bold min-h-[40px] py-2"
@@ -163,7 +163,7 @@ export default function ProfilePage() {
 									</label>
 								</div>
 
-								<div className="flex flex-col items-center justify-start w-full">
+								<div className="flex flex-col items-center justify-start w-full gap-4">
 									<input
 										type="text"
 										id="name"
