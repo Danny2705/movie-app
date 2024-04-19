@@ -7,8 +7,7 @@ import Personal from "../Personal/Personal";
 
 export default function Navbar({ scroll }) {
   const user = useSelector((state) => state.auth.user);
-  const location = useLocation()
-
+  const location = useLocation();
   return (
     <div
       className={`${
@@ -45,7 +44,7 @@ export default function Navbar({ scroll }) {
       </div>
 
       {/* Search bar */}
-      {location.pathname !== '/search' ? <Search  />: <div/>}
+      {location.pathname !== "/search" ? <Search /> : <div />}
 
       {/* Log In Button */}
       {!user ? (

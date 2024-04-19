@@ -5,7 +5,6 @@ const postReview = async (req, res) => {
   try {
     const { userId, rating, comment, parentReview, movieId } = req.body;
     const isAnonymous = req.body.anonymous;
-    console.log(req.body);
     const review = await Review.create({
       userId,
       rating,

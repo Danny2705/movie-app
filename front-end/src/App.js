@@ -11,8 +11,10 @@ import CharacterPage from "./screens/CharacterPage/CharacterPage";
 import SearchPage from "./screens/SearchPage/SearchPage";
 import NoMatch from "./screens/NoMatch/NoMatch";
 import ProfilePage from "./screens/ProfilePage/ProfilePage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.auth.user);
   return (
     <BrowserRouter>
       <Toaster
@@ -38,7 +40,11 @@ function App() {
         <Route path='/character' element={<CharacterPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/profile/user/:userId' element={<ProfilePage />} />
+        {user ? (
+          <Route path='/profile/user/:userId' element={<ProfilePage />} />
+        ) : (
+          <Route path='*' element={<NoMatch />} />
+        )}
         <Route path='*' element={<NoMatch />} />
       </Routes>
     </BrowserRouter>

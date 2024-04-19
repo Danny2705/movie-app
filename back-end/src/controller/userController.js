@@ -45,6 +45,70 @@ const registerUser = async (req, res) => {
   }
 };
 
+const google = async (req, res) => {
+  try {
+    const { username, email, photo } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    let existingUser = await User.findOne({ email });
+
+    if (!existingUser) {
+      const generatedUsername = username
+        ? username.split(" ").join("").toLowerCase() +
+          Math.floor(Math.random() * 10000).toString()
+        : null;
+
+      const generatedPassword =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8);
+
+      const hashPassword = bcrypt.hashSync(generatedPassword, 10);
+
+      const newUser = await User.create({
+        name: generatedUsername,
+        email,
+        password: hashPassword,
+        profilePicture: photo,
+      });
+
+      const token = jwt.sign(
+        {
+          id: newUser._id,
+          name: newUser.name,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+
+      const { password: hashedPassword, ...userData } = newUser._doc;
+      return res.status(200).json({ data: userData, token });
+    }
+
+    const token = jwt.sign(
+      {
+        id: existingUser._id,
+        name: existingUser.name,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    const { password: hashedPassword, ...userData } = existingUser._doc;
+
+    return res.status(200).json({ data: userData, token });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 const loginUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -103,17 +167,35 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
+  // if (req.user.id !== req.params.id) {
+  //   return res
+  //     .status(401)
+  //     .json({ message: "You can update only your account" });
+  // }
   try {
     let updatedData = req.body;
     if (updatedData.password) {
       updatedData.password = await bcrypt.hash(updatedData.password, 10);
     }
-    const user = await User.findByIdAndUpdate(id, updatedData, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          name: updatedData.name,
+          email: updatedData.email,
+          password: updatedData.password,
+          profilePicture: updatedData.profilePicture,
+        },
+      },
+      { new: true }
+    );
 
-    if (!user) {
+    if (!updatedUser) {
       return res.status(404).json({ error: "There is no such user" });
     }
-    res.status(200).json(user);
+
+    const { password, ...others } = updatedUser._doc;
+    res.status(200).json(others);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -134,4 +216,11 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getUser, updateUser, deleteUser };
+module.exports = {
+  registerUser,
+  loginUser,
+  getUser,
+  updateUser,
+  deleteUser,
+  google,
+};

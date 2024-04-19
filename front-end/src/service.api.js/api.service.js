@@ -17,13 +17,24 @@ export const signUp = async (user) => {
 };
 
 export const login = async (user) => {
-  return httpClient
+  return await httpClient
     .post(`/user/login`, user)
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
       // console.log(error);
+      return error;
+    });
+};
+
+export const oAuth = async (user) => {
+  return await httpClient
+    .post(`/user/auth/google`, user)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
       return error;
     });
 };
@@ -67,6 +78,17 @@ export const postLikeComment = async (commentId, userId) => {
     .post(`/review/like-comments`, data)
     .then((response) => {
       return response;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const updateUserProfile = async (id, user) => {
+  return await httpClient
+    .put(`/user/${id}`, user)
+    .then((response) => {
+      return response.data;
     })
     .catch((error) => {
       console.log(error);

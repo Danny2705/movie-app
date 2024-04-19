@@ -41,11 +41,16 @@ export default function Personal() {
         <span className='text-left underline underline-offset-4 decoration-main-red'>
           {user.name}
         </span>
-        <BsPersonCircle className='text-2xl text-main-red duration-500 hover:text-[#da3354]' />
+        {/* <BsPersonCircle  /> */}
+        <img
+          src={user?.profilePicture}
+          alt='user avatar'
+          className='text-2xl text-main-red duration-500 hover:text-[#da3354] w-7 h-7 rounded-full'
+        />
       </button>
       {select && (
         <div className='relative'>
-          <div className='absolute top-2 w-[150px] h-[200px] right-3 flex flex-col items-center justify-center bg-opacity-80 bg-black px-4 py-2 gap-2 border-main-red border rounded-tl-xl rounded-bl-xl rounded-br-xl'>
+          <div className='absolute top-2 w-[150px] h-[200px] right-3 flex flex-col items-center justify-center bg-opacity-80 bg-black px-4 py-2 gap-6 border-main-red border rounded-tl-xl rounded-bl-xl rounded-br-xl'>
             <Link to={`/profile/user/${user._id}`}>
               <button>Profile</button>
             </Link>

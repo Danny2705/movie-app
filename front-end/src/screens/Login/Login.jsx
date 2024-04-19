@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { logIn } from "../../redux/authSlice";
 import { login } from "../../service.api.js/api.service";
+import OAuth from "./OAuth";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -95,6 +96,7 @@ export default function Login() {
                 <span className='font-josefin'>Log In</span>
               </button>
             </form>
+            <OAuth />
           </div>
           <span className='mt-4 flex items-center justify-center gap-2'>
             <p className='text-sm text-[#3a3e55] font-josefin'>

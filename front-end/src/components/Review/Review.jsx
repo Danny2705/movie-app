@@ -27,17 +27,16 @@ export default function Review() {
   const handlePost = async (e) => {
     e.preventDefault();
 
-    if (user.name) {
-      const postData = {
-        userId: user._id,
-        rating: rating,
-        anonymous: !user,
-        comment: comment,
-        movieId: params.id,
-        parentReview: null,
-      };
-      await postComment(postData);
-    }
+    const postData = {
+      userId: user?._id,
+      rating: rating,
+      anonymous: !user,
+      comment: comment,
+      movieId: params.id,
+      parentReview: null,
+    };
+    await postComment(postData);
+
     setComment("");
     fetchComments();
   };
@@ -75,9 +74,13 @@ export default function Review() {
       <div className='flex items-start w-full'>
         <div className='w-[70px]'>
           <img
-            src='/assets/profile.png'
+            src={
+              user?.profilePicture
+                ? user?.profilePicture
+                : "/assets/profile.jpg"
+            }
             alt='User Profile'
-            className='w-[50px] h-[50px] border'
+            className='w-[50px] h-[50px] rounded-full'
           />
         </div>
         <div className='w-full'>

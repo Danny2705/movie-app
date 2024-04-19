@@ -103,11 +103,15 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
 
   return (
     <div className='flex w-full mt-6 items-start justify-start'>
-      <div className='w-[70px]'>
+      <div className='w-[50px]'>
         <img
-          src='/assets/profile.png'
+          src={
+            com.user[0]?.profilePicture
+              ? com.user[0].profilePicture
+              : "/assets/profile.jpg"
+          }
           alt='User Profile'
-          className='w-[50px] h-[50px] border rounded-full'
+          className='w-[30px] h-[30px] rounded-full'
         />
       </div>
       <div className='w-full flex flex-col'>
@@ -220,11 +224,15 @@ const ReviewCard = ({ com, fetchComments, replies }) => {
             )}
             {isReply && (
               <div className='flex items-start mt-2 w-full'>
-                <div className='w-[70px]'>
+                <div className='w-[50px]'>
                   <img
-                    src='/assets/profile.png'
+                    src={
+                      user?.profilePicture
+                        ? user?.profilePicture
+                        : "/assets/profile.jpg"
+                    }
                     alt='User Profile'
-                    className='w-[50px] h-[50px] border rounded-full'
+                    className='w-[30px] h-[30px] rounded-full'
                   />
                 </div>
                 <FormReview
