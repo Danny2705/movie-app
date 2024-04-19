@@ -76,14 +76,9 @@ export default function Popular() {
 							(movie, i) =>
 								i < 15 &&
 								movie.popularity > 0 && (
-									<Link
-										key={i}
-										to={`/library/title/${movie.title}/${movie.mal_id}`}
-									>
-										<div className="border max-w-[300px]">
-											{<Card movie={movie} />}
-										</div>
-									</Link>
+									<div className="border max-w-[300px]">
+										{<Card movie={movie} />}
+									</div>
 								)
 						)
 					)}
