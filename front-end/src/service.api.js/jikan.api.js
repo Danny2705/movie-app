@@ -23,6 +23,17 @@ export const getUpcomingAnime = async () => {
   }
 };
 
+export const getRandomAnime = async () => {
+  try {
+    const { data } = await axios.get(
+      "https://api.jikan.moe/v4/random/anime?order_by=popularity"
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 export const getAnimeByGenres = async (genre_id) => {
   try {
     const { data } = await axios.get(
@@ -48,7 +59,12 @@ export const searchAnime = async (searchPrompt) => {
 export const advanceSearchAnime = async (searchPrompt) => {
   try {
     const { data } = await axios.get(
-      url + `?q=${searchPrompt.q}&type=${searchPrompt.type}&genres=${searchPrompt.genres.join(',')}&status=${searchPrompt.status}&order_by=popularity`
+      url +
+        `?q=${searchPrompt.q}&type=${
+          searchPrompt.type
+        }&genres=${searchPrompt.genres.join(",")}&status=${
+          searchPrompt.status
+        }&order_by=popularity`
     );
     return data;
   } catch (err) {
@@ -131,4 +147,3 @@ export const getAnimePagination = async (page_number, letter) => {
     throw new Error(error.message);
   }
 };
-

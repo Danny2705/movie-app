@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaPlay, FaStar } from "react-icons/fa";
-import { getAnimeRelations } from "../service.api.js/jikan.api";
-import { Link } from "react-router-dom";
+import { getAnimeRelations, getRandomAnime } from "../service.api.js/jikan.api";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function RightMovie({ id, setSelected }) {
   const [animeRelations, setAnimeRelations] = useState([]);
   const [displayCount, setDisplayCount] = useState(10);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchAnimeId = async () => {
       const data = await getAnimeRelations(id);
@@ -19,13 +20,25 @@ export default function RightMovie({ id, setSelected }) {
   const handleShowMore = () => {
     setDisplayCount((prevCount) => prevCount + 20);
   };
+
+  const handleWatchRandomly = async () => {
+    const data = await getRandomAnime();
+    if (!data.data.mal_id) {
+      toast.error("No data found. Please refresh again");
+    } else {
+      navigate(`/library/title/${data.data.title}/${data.data.mal_id}`);
+    }
+  };
   return (
     <div className='min-h-[100vh] w-full min-w-[420px] p-4 flex flex-col gap-3'>
       <h1 className='border-b border-[#b5e745] pb-1'>
         Don't know what <span className='font-josefin'>Anime</span> to watch?
       </h1>
 
-      <button className='py-1 px-2 bg-main-red flex items-center gap-2 w-fit duration-500 hover:bg-[#da3354]'>
+      <button
+        onClick={handleWatchRandomly}
+        className='py-1 px-2 bg-main-red flex items-center gap-2 w-fit duration-500 hover:bg-[#da3354]'
+      >
         <FaPlay />
         Watch Randomly
       </button>
