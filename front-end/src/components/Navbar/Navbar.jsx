@@ -54,6 +54,8 @@ export default function Navbar({ scroll }) {
             <span className='font-josefin'>Log In</span>
           </div>
         </Link>
+      ) : location.pathname === `/profile/user/${user._id}` ? (
+        <div />
       ) : (
         <Personal />
       )}

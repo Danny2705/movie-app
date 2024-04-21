@@ -14,6 +14,8 @@ export default function Review() {
   const [commentData, setCommentData] = useState([]);
   const [rating, setRating] = useState(0);
   const [visibleComments, setVisibleComments] = useState(10);
+  const [childrenComment, setChildrenComment] = useState([]);
+  const [rootComments, setRootComments] = useState([]);
   const user = useSelector((state) => state.auth.user);
   const params = useParams();
   /*
@@ -39,19 +41,41 @@ export default function Review() {
     setComment("");
     fetchComments();
   };
-
-  const rootComments = commentData.filter(
-    (comment) => comment.parentReview === null
-  );
-
   const getReplies = (commentId) => {
-    return commentData.filter((comment) => comment.parentReview === commentId);
+    return childrenComment.filter(
+      (comment) => comment.parentReview === commentId
+    );
   };
 
   const fetchComments = async () => {
     const data = await getCommentsByMovieId(params.id);
     setCommentData(data);
   };
+
+  useEffect(() => {
+    const sortData = () => {
+      setRootComments(
+        commentData.filter((comment) => comment.parentReview === null)
+      );
+
+      setChildrenComment(
+        commentData
+          .filter((cmt) => cmt.parentReview !== null)
+          .sort((a, b) => {
+            const nameA = a.createdAt;
+            const nameB = b.createdAt;
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          })
+      );
+    };
+    sortData();
+  }, [commentData]);
 
   useEffect(() => {
     fetchComments();

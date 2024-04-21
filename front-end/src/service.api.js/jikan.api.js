@@ -147,3 +147,10 @@ export const getAnimePagination = async (page_number, letter) => {
     throw new Error(error.message);
   }
 };
+
+export const getCharacterAnime = async () => {
+  try {
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
