@@ -148,8 +148,21 @@ export const getAnimePagination = async (page_number, letter) => {
   }
 };
 
-export const getCharacterAnime = async () => {
+export const getScheduleAnime = async () => {
   try {
+    const { data } = await axios.get("https://api.jikan.moe/v4/schedules");
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getScheduleAnimeByDay = async (day) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.jikan.moe/v4/schedules?filter=${day}`
+    );
+    return data;
   } catch (error) {
     throw new Error(error.message);
   }

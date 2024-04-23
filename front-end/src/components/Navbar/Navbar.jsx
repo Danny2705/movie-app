@@ -36,10 +36,10 @@ export default function Navbar({ scroll }) {
           Trend
         </Link>
         <Link
-          to='/character'
+          to='/schedule'
           className='nav-link font-josefin transition-all duration-500 relative'
         >
-          Character
+          Schedule
         </Link>
       </div>
 

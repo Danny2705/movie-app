@@ -7,11 +7,11 @@ import Signup from "./screens/Signup/Signup";
 import { Toaster } from "react-hot-toast";
 import Layout from "./screens/Layout/Layout";
 import MovieInfo from "./screens/MovieInfo/MovieInfo";
-import CharacterPage from "./screens/CharacterPage/CharacterPage";
 import SearchPage from "./screens/SearchPage/SearchPage";
 import NoMatch from "./screens/NoMatch/NoMatch";
 import ProfilePage from "./screens/ProfilePage/ProfilePage";
 import { useSelector } from "react-redux";
+import SchedulePage from "./screens/SchedulePage/SchedulePage";
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -37,7 +37,7 @@ function App() {
         <Route path='/library/:letter' element={<LibraryPage />} />
         <Route path='/library/title/:title/:id' element={<MovieInfo />} />
         <Route path='/trend' element={<TrendPage />} />
-        <Route path='/character' element={<CharacterPage />} />
+        <Route path='/schedule' element={<SchedulePage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         {user ? (
