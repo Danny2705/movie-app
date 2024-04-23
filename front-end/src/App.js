@@ -12,6 +12,7 @@ import NoMatch from "./screens/NoMatch/NoMatch";
 import ProfilePage from "./screens/ProfilePage/ProfilePage";
 import { useSelector } from "react-redux";
 import SchedulePage from "./screens/SchedulePage/SchedulePage";
+import WatchList from "./screens/WatchList/WatchList";
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -37,6 +38,7 @@ function App() {
         <Route path='/library/:letter' element={<LibraryPage />} />
         <Route path='/library/title/:title/:id' element={<MovieInfo />} />
         <Route path='/trend' element={<TrendPage />} />
+        <Route path='/watchlist' element={<WatchList />} />
         <Route path='/schedule' element={<SchedulePage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />

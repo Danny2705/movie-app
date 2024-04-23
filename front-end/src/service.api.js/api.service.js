@@ -61,6 +61,17 @@ export const updateComment = async (id, data) => {
       console.log(error);
     });
 };
+export const handleWatchlist = async (id, data) => {
+  return await httpClient
+    .put(`/user/watchlist/${id}`, data)
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export const deleteComment = async (id) => {
   return await httpClient

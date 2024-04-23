@@ -3,6 +3,10 @@ import './Card.css';
 import { FaPlay } from 'react-icons/fa';
 import { FaHeart, FaHeartCrack } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { handleWatchlist } from '../service.api.js/api.service';
+import { updateUser } from '../redux/authSlice';
 const months = [
 	'January',
 	'February',
@@ -19,7 +23,10 @@ const months = [
 ];
 
 export default function Card({ movie, type = 'normal' }) {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const user = useSelector((state) => state.auth.user);
+	// console.log(movie);
 	const [date, setDate] = useState('Unknown');
 	useEffect(() => {
 		if (type === 'upcoming') {
@@ -38,8 +45,25 @@ export default function Card({ movie, type = 'normal' }) {
 		}
 	}, [type, movie.aired.from]);
 	const [toggle, setToggle] = useState(false);
-  const [heartHover, setHeartHover] = useState(false);
-  const [heartToggle, setHeartToggle] = useState(false);
+	const [heartHover, setHeartHover] = useState(false)
+	const [heartToggle, setHeartToggle] = useState(
+		user && user.watchlist.some(item => item.mal_id === movie.mal_id)
+	);;
+
+	const handleAddToList = async (action) => {
+		if (!user) {
+			toast.error('Please login first to add to watchlist');
+			return;
+		}
+		const updateData = {
+			movie: movie,
+			action: action || 'remove',
+		};
+
+		const data = await handleWatchlist(user._id, updateData);
+		if(!data) return
+		dispatch(updateUser(data))
+	};
 	return (
 		<div
 			className="movie-card relative"
@@ -71,19 +95,39 @@ export default function Card({ movie, type = 'normal' }) {
 						className="absolute top-2 right-2 w-10 h-10"
 						onClick={(e) => {
 							e.stopPropagation();
-							setHeartToggle(!heartToggle)
+							if (!heartToggle) {
+								setHeartToggle(true);
+								handleAddToList('add');
+							} else {
+								setHeartToggle(false);
+								handleAddToList('remove');
+							}
 						}}
-            onMouseEnter={() => setHeartHover(true)}
-            onMouseLeave={() => setHeartHover(false)}
+						onMouseEnter={() => setHeartHover(true)}
+						onMouseLeave={() => setHeartHover(false)}
 					>
-						{!heartToggle ? (heartHover ? <FaHeart size={30} className='text-main-activate' /> : <FaHeart size={30} className='' />) : (heartHover ? <FaHeartCrack size={30} className='' /> : <FaHeart size={30} className='text-main-activate' />)}
+						{!heartToggle ? (
+							heartHover ? (
+								<FaHeart size={30} className="text-main-activate" />
+							) : (
+								<FaHeart size={30} className="" />
+							)
+						) : heartHover ? (
+							<FaHeartCrack size={30} className="" />
+						) : (
+							<FaHeart size={30} className="text-main-activate" />
+						)}
 					</div>
 					<div className="w-[70px] h-[70px] rounded-full justify-center items-center pl-2 text-main-red flex bg-transparent border-2 border-white play-btn">
 						<FaPlay size={40} />{' '}
+						
 					</div>
 				</div>
 			) : (
 				<div className="default-card">
+					<div className="absolute bottom-2 right-2 w-10 h-10">
+					{heartToggle && <FaHeart size={30} className="text-main-activate" />}
+						</div>
 					<div className="absolute w-full top-0 thumbnail-header flex ">
 						<span className="flex-[4] flex flex-col p-2 text-xl">
 							<div className="thumbnail-name">

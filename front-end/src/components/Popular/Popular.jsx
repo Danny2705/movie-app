@@ -74,7 +74,7 @@ export default function Popular() {
           ) : (
             movies.map(
               (movie, i) =>
-                i < 15 &&
+                
                 movie.popularity > 0 && (
                   <div className='border max-w-[300px]' key={i}>
                     {<Card movie={movie} />}

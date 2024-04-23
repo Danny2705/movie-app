@@ -9,6 +9,7 @@ router.post("/user/auth/google", userController.google);
 
 router.get("/user", userController.getUser);
 router.put("/user/:id", userController.updateUser);
+router.put("/user/watchlist/:id", userController.addOrRemoveMovieToWatchlist);
 router.delete("/user/:id", userController.deleteUser);
 
 module.exports = router;
