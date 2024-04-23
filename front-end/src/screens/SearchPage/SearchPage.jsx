@@ -174,25 +174,33 @@ const SearchPage = () => {
           </div>
         </div>
         <div className='flex flex-wrap w-full justify-between gap-4 gap-y-8'>
-          {searchData?.map(
-            (movie, index) =>
-              movie.popularity > 0 && (
-                <div key={index} className='search-result'>
-                  <Link to={`/library/title/${movie.title}/${movie.mal_id}`}>
-                    <Card movie={movie} />
-                  </Link>
-                </div>
-              )
+          {searchData === null ? (
+            <div className='text-xl h-[100vh]'>Loading ...</div>
+          ) : (
+            <div className='flex flex-wrap w-full justify-between gap-4 gap-y-8'>
+              {searchData?.map(
+                (movie, index) =>
+                  movie.popularity > 0 && (
+                    <div key={index} className='search-result'>
+                      <Link
+                        to={`/library/title/${movie.title}/${movie.mal_id}`}
+                      >
+                        <Card movie={movie} />
+                      </Link>
+                    </div>
+                  )
+              )}
+              <div className='w-full flex justify-center'>
+                <SearchPagination
+                  setMoviesLetter={setSearchData}
+                  totalPage={totalPage}
+                  setTotalPage={setTotalPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+            </div>
           )}
-        </div>
-        <div className='w-full flex justify-center'>
-          <SearchPagination
-            setMoviesLetter={setSearchData}
-            totalPage={totalPage}
-            setTotalPage={setTotalPage}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
         </div>
       </div>
     </div>
