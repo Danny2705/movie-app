@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { advanceSearchAnime } from "../../service.api.js/jikan.api";
+import {
+  advanceSearchAnime,
+  getAdvanceSearchAnimePage,
+} from "../../service.api.js/jikan.api";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 import { useSelector } from "react-redux";
@@ -20,7 +23,7 @@ export default function SearchPagination({
   useEffect(() => {
     const fetchPagination = async () => {
       try {
-        const pageNumber = await advanceSearchAnime({
+        const pageNumber = await getAdvanceSearchAnimePage(1, {
           q: searchPrompt || "",
           type: searchType || "",
           genres: searchGenres || [],
@@ -38,13 +41,15 @@ export default function SearchPagination({
   const handlePageClick = async (event) => {
     try {
       const newPageNumber = event.selected + 1;
-      const response = await advanceSearchAnime({
+      const response = await getAdvanceSearchAnimePage(newPageNumber, {
         q: searchPrompt || "",
         type: searchType || "",
         genres: searchGenres || [],
         status: searchStatus || "",
       });
+      console.log(response);
       setMoviesLetter(response.data);
+      setTotalPage(response.pagination.last_visible_page);
       setCurrentPage(newPageNumber);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {

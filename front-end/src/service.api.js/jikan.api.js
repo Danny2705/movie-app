@@ -169,3 +169,19 @@ export const getScheduleAnimeByDay = async (day) => {
     throw new Error(error.message);
   }
 };
+
+export const getAdvanceSearchAnimePage = async (pageNumber, searchPrompt) => {
+  try {
+    const { data } = await axios.get(
+      url +
+        `?q=${searchPrompt.q}&type=${
+          searchPrompt.type
+        }&genres=${searchPrompt.genres.join(",")}&status=${
+          searchPrompt.status
+        }&page=${pageNumber}&order_by=popularity`
+    );
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};

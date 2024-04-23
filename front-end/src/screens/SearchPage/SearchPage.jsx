@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   advanceSearchAnime,
   searchAnime,
@@ -54,7 +54,6 @@ const statusOptions = [
 ];
 
 const SearchPage = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const [scroll, setScroll] = useState(0);
   const [searchData, setSearchData] = useState(null);
@@ -91,19 +90,14 @@ const SearchPage = () => {
   }, []);
 
   const handleTypeSelect = (option) => {
-    console.log(option);
     dispatch(setSearchType(option.value));
   };
 
   const handleStatusSelect = (option) => {
-    console.log(option);
-
     dispatch(setSearchStatus(option.value));
   };
 
   const handleGenreChange = (selectedOptions) => {
-    console.log(console.log(selectedOptions));
-
     dispatch(setSearchGenre(selectedOptions[0] === 0 ? [] : selectedOptions));
   };
 
