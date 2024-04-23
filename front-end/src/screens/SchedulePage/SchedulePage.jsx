@@ -56,7 +56,7 @@ export default function SchedulePage() {
     <div className='px-[100px] py-20'>
       <Navbar scroll={scroll} />
       <div className='flex flex-col gap-4'>
-        <div className='flex items-center w-full flex-wrap gap-2 mt-[80px]'>
+        <div className='flex w-full flex-wrap gap-2 mt-[80px]'>
           <button
             className={`${
               selectBtn === "Show All" ? "bg-main-red" : "bg-slate-900"

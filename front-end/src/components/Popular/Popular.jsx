@@ -6,6 +6,8 @@ import {
   getPopularAnime,
 } from "../../service.api.js/jikan.api";
 import { Link } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
+import Reveal from "../Reveal";
 
 const genres = [
   { title: "All", id: 0 },
@@ -47,7 +49,7 @@ export default function Popular() {
     <main>
       <div className='px-[100px] pt-[120px]'>
         <h1 className='heading uppercase text-2xl relative font-medium tracking-[1px] mb-[30px]'>
-          The Top Most Popular
+          <Reveal>The Top Most Popular</Reveal>
         </h1>
 
         {/* Sorting Some Category of The Top Most Popular Anime */}
@@ -74,7 +76,6 @@ export default function Popular() {
           ) : (
             movies.map(
               (movie, i) =>
-                
                 movie.popularity > 0 && (
                   <div className='border max-w-[300px]' key={i}>
                     {<Card movie={movie} />}

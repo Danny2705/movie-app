@@ -7,7 +7,6 @@ import BackToTopBtn from "../../components/Navbar/BackToTopBtn";
 
 export default function Layout() {
   const [scroll, setScroll] = useState(0);
-
   useEffect(() => {
     const handleScroll = () => {
       setScroll(window.scrollY);

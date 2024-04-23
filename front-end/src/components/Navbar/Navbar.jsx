@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
 import { useSelector } from "react-redux";
 import Personal from "../Personal/Personal";
+import Reveal from "../Reveal";
 
 export default function Navbar({ scroll }) {
   const user = useSelector((state) => state.auth.user);
@@ -14,33 +15,41 @@ export default function Navbar({ scroll }) {
         scroll > 100 ? "scrolled" : undefined
       } navbar py-4 flex items-center justify-between`}
     >
-      <Link to='/' className='logo flex items-center'>
-        <span className='font-josefin text-[#DC143C] text-2xl tracking-wider'>
-          Anime
-        </span>
-        <span className='font-josefin text-lg'>Cave</span>
-      </Link>
+      <Reveal>
+        <Link to='/' className='logo flex items-center'>
+          <span className='font-josefin text-[#DC143C] text-2xl tracking-wider'>
+            Anime
+          </span>
+          <span className='font-josefin text-lg'>Cave</span>
+        </Link>
+      </Reveal>
 
       {/* Website Links */}
       <div className='flex items-center justify-around gap-4'>
-        <Link
-          to='/library'
-          className='nav-link font-josefin transition-all duration-500 relative'
-        >
-          Library
-        </Link>
-        <Link
-          to='/trend'
-          className='nav-link font-josefin transition-all duration-500 relative'
-        >
-          Trend
-        </Link>
-        <Link
-          to='/schedule'
-          className='nav-link font-josefin transition-all duration-500 relative'
-        >
-          Schedule
-        </Link>
+        <Reveal>
+          <Link
+            to='/library'
+            className='nav-link font-josefin transition-all duration-500 relative'
+          >
+            Library
+          </Link>
+        </Reveal>
+        <Reveal>
+          <Link
+            to='/trend'
+            className='nav-link font-josefin transition-all duration-500 relative'
+          >
+            Trend
+          </Link>
+        </Reveal>
+        <Reveal>
+          <Link
+            to='/schedule'
+            className='nav-link font-josefin transition-all duration-500 relative'
+          >
+            Schedule
+          </Link>
+        </Reveal>
       </div>
 
       {/* Search bar */}

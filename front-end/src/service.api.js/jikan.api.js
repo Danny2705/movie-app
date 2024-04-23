@@ -150,7 +150,9 @@ export const getAnimePagination = async (page_number, letter) => {
 
 export const getScheduleAnime = async () => {
   try {
-    const { data } = await axios.get("https://api.jikan.moe/v4/schedules");
+    const { data } = await axios.get(
+      "https://api.jikan.moe/v4/schedules?kids=false"
+    );
     return data;
   } catch (error) {
     throw new Error(error.message);
