@@ -49,7 +49,6 @@ export default function SearchPagination({
       });
       console.log(response);
       setMoviesLetter(response.data);
-      setTotalPage(response.pagination.last_visible_page);
       setCurrentPage(newPageNumber);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {

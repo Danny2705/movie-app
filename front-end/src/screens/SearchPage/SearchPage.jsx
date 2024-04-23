@@ -77,7 +77,6 @@ const SearchPage = () => {
 
   const fetchSearchResult = async (reload) => {
     const data = await searchAnime(reload === "reload" ? "" : searchPrompt);
-    console.log(data);
     setSearchData(data.data);
   };
 
