@@ -28,7 +28,6 @@ export default function UpcomingPage() {
     const fetchAnimes = async () => {
       try {
         const responseData = await getUpcomingPageAnime(1);
-        console.log(responseData);
         setData(responseData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -43,7 +42,6 @@ export default function UpcomingPage() {
         if (data.pagination.has_next_page) {
           const nextPage = data.pagination.current_page + 1;
           const newData = await getUpcomingPageAnime(nextPage);
-          console.log(newData);
 
           setData((prevData) => ({
             data: [...prevData.data, ...newData.data],
@@ -73,6 +71,10 @@ export default function UpcomingPage() {
             Anime Library
           </h1>
         </div>
+
+        <span className='font-josefin text-center text-xl text-main-red'>
+          🎯 Scroll Down to See More 🎯
+        </span>
 
         {hasMore === true ? (
           <div className='flex flex-col'>
