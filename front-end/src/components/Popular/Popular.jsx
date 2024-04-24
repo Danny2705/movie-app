@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Card";
-//import { fetchAnime } from '../../service.api.js/cosumet.api';
 import {
   getAnimeByGenres,
   getPopularAnime,
 } from "../../service.api.js/jikan.api";
 import { Link } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
 import Reveal from "../Reveal";
 
 const genres = [
@@ -84,9 +82,11 @@ export default function Popular() {
             )
           )}
           <div className='absolute w-full h-[140px] fadeToBlack bottom-0 flex justify-center items-center '>
-            <div className='w-fit h-fit uppercase px-10 py-2 bg-main-red hover:bg-main-activate rounded-full mt-10 flex font-bold justify-center cursor-pointer items-center'>
-              Show all
-            </div>
+            <Link to='/library'>
+              <div className='w-fit h-fit uppercase px-10 py-2 bg-main-red hover:bg-main-activate rounded-full mt-10 flex font-bold justify-center cursor-pointer items-center'>
+                Show all
+              </div>
+            </Link>
           </div>
         </div>
       </div>

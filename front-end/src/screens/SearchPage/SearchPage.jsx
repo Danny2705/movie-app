@@ -14,9 +14,7 @@ import {
   setSearchStatus,
   clearSearch,
 } from "../../redux/contentSlice";
-import { CiSearch } from "react-icons/ci";
 import Select from "../../components/Select";
-import { Rating } from "@mui/material";
 import CheckboxDropdown from "../../components/CheckboxDropdown";
 import { FaSearch } from "react-icons/fa";
 import SearchPagination from "./SearchPagination";

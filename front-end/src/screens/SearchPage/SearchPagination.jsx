@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import {
-  advanceSearchAnime,
-  getAdvanceSearchAnimePage,
-} from "../../service.api.js/jikan.api";
+import { getAdvanceSearchAnimePage } from "../../service.api.js/jikan.api";
 import { FcPrevious } from "react-icons/fc";
 import { FcNext } from "react-icons/fc";
 import { useSelector } from "react-redux";

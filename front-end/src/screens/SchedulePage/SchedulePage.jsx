@@ -56,7 +56,18 @@ export default function SchedulePage() {
     <div className='px-[100px] py-20'>
       <Navbar scroll={scroll} />
       <div className='flex flex-col gap-4'>
-        <div className='flex w-full flex-wrap gap-2 mt-[80px]'>
+        <div>
+          <h4 className='text-[13px] cursor-pointer w-fit mt-[80px]'>
+            <Link to='/' className='hover:text-[grey] duration-500'>
+              Home
+            </Link>{" "}
+            / <span className='hover:text-[grey] duration-500'>Schedule</span>
+          </h4>
+          <h1 className='bg-main-red w-fit px-2 py-1 text-lg rounded-t-md'>
+            Anime Schedule
+          </h1>
+        </div>
+        <div className='flex w-full flex-wrap gap-2'>
           <button
             className={`${
               selectBtn === "Show All" ? "bg-main-red" : "bg-slate-900"

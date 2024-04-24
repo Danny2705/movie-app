@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import LibraryPage from "./screens/LibraryPage/LibraryPage";
-import TrendPage from "./screens/TrendPage/TrendPage";
 import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 import { Toaster } from "react-hot-toast";
@@ -12,6 +11,7 @@ import NoMatch from "./screens/NoMatch/NoMatch";
 import ProfilePage from "./screens/ProfilePage/ProfilePage";
 import { useSelector } from "react-redux";
 import SchedulePage from "./screens/SchedulePage/SchedulePage";
+import UpcomingPage from "./screens/UpcomingPage/UpcomingPage";
 import WatchList from "./screens/WatchList/WatchList";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
         <Route path='/library' element={<Navigate to='/library/ShowAll' />} />
         <Route path='/library/:letter' element={<LibraryPage />} />
         <Route path='/library/title/:title/:id' element={<MovieInfo />} />
-        <Route path='/trend' element={<TrendPage />} />
+        <Route path='/upcoming' element={<UpcomingPage />} />
         <Route path='/watchlist' element={<WatchList />} />
         <Route path='/schedule' element={<SchedulePage />} />
         <Route path='/login' element={<Login />} />

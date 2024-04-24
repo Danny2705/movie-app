@@ -36,10 +36,10 @@ export default function Navbar({ scroll }) {
         </Reveal>
         <Reveal>
           <Link
-            to='/trend'
+            to='/upcoming'
             className='nav-link font-josefin transition-all duration-500 relative'
           >
-            Trend
+            Upcoming
           </Link>
         </Reveal>
         <Reveal>

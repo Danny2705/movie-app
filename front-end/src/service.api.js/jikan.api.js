@@ -185,3 +185,14 @@ export const getAdvanceSearchAnimePage = async (pageNumber, searchPrompt) => {
     throw new Error(err.message);
   }
 };
+
+export const getUpcomingPageAnime = async (page) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.jikan.moe/v4/seasons/upcoming?page=${page}`
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

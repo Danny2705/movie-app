@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Card";
 import { getUpcomingAnime } from "../../service.api.js/jikan.api";
 import Reveal from "../Reveal";
+import { Link } from "react-router-dom";
 
 export default function Upcoming() {
   const [movies, setMovies] = useState([]);
@@ -34,9 +35,11 @@ export default function Upcoming() {
           )
         )}
         <div className='absolute w-full h-[140px] fadeToBlack bottom-0 flex justify-center items-center '>
-          <div className='w-fit h-fit uppercase px-10 py-2 bg-main-red hover:bg-main-activate rounded-full mt-10 flex font-bold justify-center cursor-pointer items-center'>
-            Show all
-          </div>
+          <Link to='/upcoming'>
+            <div className='w-fit h-fit uppercase px-10 py-2 bg-main-red hover:bg-main-activate rounded-full mt-10 flex font-bold justify-center cursor-pointer items-center'>
+              Show all
+            </div>
+          </Link>
         </div>
       </div>
     </div>
