@@ -10,6 +10,7 @@ import Reveal from "../Reveal";
 export default function Personal() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const darkMode = useSelector((state) => state.theme.darkMode);
   const navigate = useNavigate();
   const [select, setSelect] = useState(false);
   let menuRef = useRef();
@@ -52,7 +53,11 @@ export default function Personal() {
       </button>
       {select && (
         <div className='relative'>
-          <div className='absolute top-2 w-[150px] h-[200px] right-3 flex flex-col items-center justify-center bg-opacity-80 bg-black px-4 py-2 gap-6 border-main-red border rounded-tl-xl rounded-bl-xl rounded-br-xl'>
+          <div
+            className={`absolute top-2 w-[150px] h-[200px] right-3 flex flex-col items-center justify-center bg-opacity-80 ${
+              darkMode ? "bg-black" : "bg-white"
+            } px-4 py-2 gap-6 border-main-red border rounded-tl-xl rounded-bl-xl rounded-br-xl`}
+          >
             <Link to={`/profile/user/${user._id}`}>
               <button>Profile</button>
             </Link>

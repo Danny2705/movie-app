@@ -1,11 +1,22 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function Footer() {
+  const darkMode = useSelector((state) => state.theme.darkMode);
   return (
-    <footer className='footer h-[250px] border-t border-[grey] bg-transparent text-sm pb-[30px] relative mt-4 bottom-0 w-full'>
-      <div className='footer-top h-full'>
-        <div className='px-[50px] relative z-10 flex items-start justify-around'>
+    <footer
+      className={`${
+        darkMode ? "dark-mode" : "light-mode"
+      } footer h-[250px] border-t border-[grey] bg-transparent text-sm relative bottom-0 w-full`}
+    >
+      <div className='footer-top flex items-center justify-center w-full h-full px-4'>
+        <img
+          src={"/assets/footer.jpg"}
+          alt='footer background'
+          className='relative flex-1 w-[200px] h-[180px] object-cover'
+        />
+        <div className='z-10 flex flex-[3] items-start justify-around'>
           <div>
             <div className='logo flex items-center'>
               <span className='font-josefin text-[#DC143C] text-2xl tracking-wider'>
@@ -50,9 +61,9 @@ export default function Footer() {
             <h2 className='font-josefin font-bold'>Links</h2>
             <div className='flex flex-col'>
               <span className='text-[11px] text-[grey]'>Home</span>
-              <span className='text-[11px] text-[grey]'>Popular</span>
-              <span className='text-[11px] text-[grey]'>Trend</span>
-              <span className='text-[11px] text-[grey]'>Character</span>
+              <span className='text-[11px] text-[grey]'>Library</span>
+              <span className='text-[11px] text-[grey]'>Upcoming</span>
+              <span className='text-[11px] text-[grey]'>Schedule</span>
               <span className='text-[11px] text-[grey]'>Terms Of Service</span>
             </div>
           </div>
@@ -79,10 +90,18 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className='flex flex-col w-full justify-center items-center text-[12px] border-t border-[grey] pt-[30px] pb-[5px]'>
+      <div
+        className={`${
+          darkMode ? "dark-mode" : "light-mode"
+        } flex flex-col w-full justify-center items-center text-[12px] border-t border-[grey] pt-[10px] pb-[5px]`}
+      >
         <span className='text-[grey]'>
           © Copyright{" "}
-          <span className='font-josefin font-bold text-[#ffffff]'>
+          <span
+            className={`font-josefin font-bold ${
+              !darkMode ? "text-black" : "text-[#ffffff]"
+            }`}
+          >
             Danny&James
           </span>
           . All rights reserved

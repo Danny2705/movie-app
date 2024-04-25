@@ -2,18 +2,27 @@ import React from "react";
 import Search from "../Search/Search";
 import { Link, useLocation } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Personal from "../Personal/Personal";
 import Reveal from "../Reveal";
+import { PiSunLight } from "react-icons/pi";
+import { MdDarkMode } from "react-icons/md";
+import { toggleDarkMode } from "../../redux/themeSlice";
 
 export default function Navbar({ scroll }) {
   const user = useSelector((state) => state.auth.user);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
+  const handleToggleDarkMode = () => {
+    dispatch(toggleDarkMode());
+  };
   return (
     <div
-      className={`${
-        scroll > 100 ? "scrolled" : undefined
-      } navbar py-4 flex items-center justify-between`}
+      className={`navbar ${scroll > 100 ? "scrolled" : undefined} ${
+        darkMode ? "dark-mode" : "light-mode"
+      } py-4 flex items-center justify-between`}
     >
       <Reveal>
         <Link to='/' className='logo flex items-center'>
@@ -54,6 +63,26 @@ export default function Navbar({ scroll }) {
 
       {/* Search bar */}
       {location.pathname !== "/search" ? <Search /> : <div />}
+
+      <div>
+        <div className='switch-container'>
+          <label className='switch'>
+            <input
+              type='checkbox'
+              checked={darkMode}
+              onChange={handleToggleDarkMode}
+            />
+            <span className='slider round'></span>
+          </label>
+          <label className='switch-label'>
+            {darkMode ? (
+              <MdDarkMode className='text-xl' />
+            ) : (
+              <PiSunLight className='text-xl' />
+            )}
+          </label>
+        </div>
+      </div>
 
       {/* Log In Button */}
       {!user ? (

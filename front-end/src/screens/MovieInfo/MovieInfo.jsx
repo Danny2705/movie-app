@@ -7,12 +7,14 @@ import View from "../../components/View";
 import RightMovie from "../../components/RightMovie";
 import MovieDetail from "../../components/MovieDetail/MovieDetail";
 import BackToTopBtn from "../../components/Navbar/BackToTopBtn";
+import { useSelector } from "react-redux";
 
 export default function MovieInfo() {
   const params = useParams();
   const [scroll, setScroll] = useState(0);
   const [animeInfo, setAnimeInfo] = useState([]);
   const [selected, setSelected] = useState("Movie Detail");
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -34,7 +36,11 @@ export default function MovieInfo() {
   }, [params.id]);
 
   return (
-    <div className='px-[100px] max-w-[100vw] min-h-[100vh] py-20'>
+    <div
+      className={`${
+        darkMode ? "dark-mode" : "light-mode"
+      } px-[100px] max-w-[100vw] min-h-[100vh] py-20`}
+    >
       <Navbar scroll={scroll} />
       <div className='mt-[80px] flex flex-col gap-4'>
         <h4 className='text-[13px] cursor-pointer w-fit'>
@@ -94,7 +100,11 @@ export default function MovieInfo() {
               </div>
             </div>
             <div className='flex-1'>
-              <div className='flex items-start bg-[#0f1416] justify-center'>
+              <div
+                className={`flex items-start ${
+                  darkMode ? "bg-[#0f1416]" : "bg-[#ccc]"
+                } justify-center`}
+              >
                 <RightMovie id={params.id} setSelected={setSelected} />
               </div>
             </div>

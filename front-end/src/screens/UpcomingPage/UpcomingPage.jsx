@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getUpcomingPageAnime } from "../../service.api.js/jikan.api";
 import Card from "../../components/Card";
+import { useSelector } from "react-redux";
 
 export default function UpcomingPage() {
   const [scroll, setScroll] = useState(0);
@@ -12,6 +13,7 @@ export default function UpcomingPage() {
     pagination: { has_next_page: true },
   });
   const [hasMore, setHasMore] = useState(true);
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -57,7 +59,9 @@ export default function UpcomingPage() {
   };
 
   return (
-    <div className='px-[100px] py-20'>
+    <div
+      className={`${darkMode ? "dark-mode" : "light-mode"} px-[100px] py-20`}
+    >
       <Navbar scroll={scroll} />
       <div className='mt-[80px] flex flex-col gap-4'>
         <div className='flex flex-col gap-4'>

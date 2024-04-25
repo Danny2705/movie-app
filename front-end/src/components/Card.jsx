@@ -26,7 +26,7 @@ export default function Card({ movie, type = "normal" }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
-  // console.log(movie);
+  const darkMode = useSelector((state) => state.theme.darkMode);
   const [date, setDate] = useState("Unknown");
   useEffect(() => {
     if (type === "upcoming") {
@@ -66,7 +66,7 @@ export default function Card({ movie, type = "normal" }) {
   };
   return (
     <div
-      className='movie-card relative'
+      className={`movie-card ${darkMode ? "dark-mode" : "light-mode"} relative`}
       onMouseEnter={() => {
         setToggle(true);
       }}
@@ -139,7 +139,11 @@ export default function Card({ movie, type = "normal" }) {
                     ?.includes(movie?.title_english?.toLowerCase()) &&
                   " - " + movie.title}
               </div>
-              <div className='text-sm text-slate-400 max-w-[200px] truncate'>
+              <div
+                className={`text-sm ${
+                  !darkMode ? "text-[#616161]" : "text-slate-400"
+                }  max-w-[200px] truncate`}
+              >
                 {movie.genres.map((genre, i) => {
                   return (
                     <span key={i} className={``}>

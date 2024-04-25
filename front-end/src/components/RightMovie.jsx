@@ -3,11 +3,13 @@ import { FaPlay, FaStar } from "react-icons/fa";
 import { getAnimeRelations, getRandomAnime } from "../service.api.js/jikan.api";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export default function RightMovie({ id, setSelected }) {
   const [animeRelations, setAnimeRelations] = useState([]);
   const [displayCount, setDisplayCount] = useState(10);
   const navigate = useNavigate();
+  const darkMode = useSelector((state) => state.theme.darkMode);
   useEffect(() => {
     const fetchAnimeId = async () => {
       const data = await getAnimeRelations(id);
@@ -31,7 +33,7 @@ export default function RightMovie({ id, setSelected }) {
   };
   return (
     <div className='min-h-[100vh] w-full min-w-[420px] p-4 flex flex-col gap-3'>
-      <h1 className='border-b border-[#b5e745] pb-1'>
+      <h1 className='border-b-2 border-[#b5e745] pb-1'>
         Don't know what <span className='font-josefin'>Anime</span> to watch?
       </h1>
 
@@ -44,7 +46,7 @@ export default function RightMovie({ id, setSelected }) {
       </button>
 
       <div className='mt-[30px]'>
-        <h2 className='uppercase font-josefin border-b border-[#b5e745]'>
+        <h2 className='uppercase font-josefin border-b-2 border-[#b5e745]'>
           Anime Relations
         </h2>
 
@@ -54,7 +56,11 @@ export default function RightMovie({ id, setSelected }) {
               to={`/library/title/${anime.entry.title}/${anime.entry.mal_id}`}
               key={index}
             >
-              <button className='flex items-start gap-3 mt-4 bg-slate-800 p-2 w-full'>
+              <button
+                className={`flex items-start gap-3 mt-4 ${
+                  darkMode ? "bg-slate-800" : "bg-slate-600"
+                } p-2 w-full`}
+              >
                 <img
                   src={anime.entry.images.webp.large_image_url}
                   alt='Movie'

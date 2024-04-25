@@ -6,6 +6,7 @@ import {
 } from "../../service.api.js/jikan.api";
 import { Link } from "react-router-dom";
 import Reveal from "../Reveal";
+import { useSelector } from "react-redux";
 
 const genres = [
   { title: "All", id: 0 },
@@ -23,6 +24,7 @@ const genres = [
 export default function Popular() {
   const [selectedBtn, setSelectedBtn] = useState("All");
   const [movies, setMovies] = useState([]);
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
     const fetchAnimes = async () => {
@@ -44,7 +46,7 @@ export default function Popular() {
   };
 
   return (
-    <main>
+    <main className={`${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className='px-[100px] pt-[120px]'>
         <h1 className='heading uppercase text-2xl relative font-medium tracking-[1px] mb-[30px]'>
           <Reveal>The Top Most Popular</Reveal>
@@ -56,9 +58,13 @@ export default function Popular() {
             return (
               <button
                 key={i}
-                className={`${
-                  selectedBtn === genre.title ? "bg-[#dc143c]" : "bg-slate-900"
-                } py-1 px-3 bg-[#dc143c]`}
+                className={`popular-btn ${
+                  selectedBtn === genre.title
+                    ? "bg-[#dc143c]"
+                    : darkMode
+                    ? "bg-slate-900"
+                    : "bg-slate-700"
+                } py-1 px-3`}
                 onClick={() => handleBtnClick(genre)}
               >
                 {genre.title}

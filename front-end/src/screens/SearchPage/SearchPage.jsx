@@ -61,6 +61,7 @@ const SearchPage = () => {
   const searchType = useSelector((state) => state.content.searchType);
   const searchGenres = useSelector((state) => state.content.searchGenres);
   const searchStatus = useSelector((state) => state.content.searchStatus);
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -109,7 +110,11 @@ const SearchPage = () => {
   };
 
   return (
-    <div className='px-[100px] min-h-[100vh] py-20'>
+    <div
+      className={`${
+        darkMode ? "dark-mode" : "light-mode"
+      } px-[100px] min-h-[100vh] py-20`}
+    >
       <Navbar scroll={scroll} />
       <div className='mt-[80px] flex flex-col gap-4'>
         <h4 className='text-[13px] cursor-pointer w-fit'>
@@ -123,8 +128,16 @@ const SearchPage = () => {
           Advance Search
         </h1>
         <div className='flex items-center w-full justify-start relative flex-wrap mt-10 gap-2'>
-          <div className='flex items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-sm w-[250px]'>
-            <div className='absolute text-sm -top-4 bg-black px-1'>
+          <div
+            className={`flex items-center border-2 ${
+              darkMode ? "border-[#e9e7e7]" : "border-black"
+            } p-1 gap-1 cursor-pointer rounded-sm w-[250px]`}
+          >
+            <div
+              className={`absolute text-sm -top-4 ${
+                darkMode ? "bg-black" : "bg-white"
+              } px-1`}
+            >
               Search Text
             </div>
             {/* <CiSearch />
@@ -139,22 +152,54 @@ const SearchPage = () => {
               onKeyDown={(e) => {
                 e.key === "Enter" && fetchSearchResult();
               }}
-              className='outline-none pl-2 pt-1 bg-transparent text-sm text-[#ffffff] placeholder-white::placeholder font-josefin'
+              className={`outline-none pl-2 pt-1 bg-transparent text-sm ${
+                darkMode ? "text-[#ffffff]" : "text-black"
+              } placeholder-white::placeholder font-josefin`}
             />
           </div>
-          <div className='flex relative items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-sm w-[250px]'>
-            <div className='absolute text-sm -top-4 bg-black px-1'>Type</div>
+          <div
+            className={`flex relative items-center border-2 ${
+              darkMode ? "border-[#e9e7e7]" : "border-black"
+            } p-1 gap-1 cursor-pointer rounded-sm w-[250px]`}
+          >
+            <div
+              className={`absolute text-sm -top-4 ${
+                darkMode ? "bg-black" : "bg-white"
+              } px-1`}
+            >
+              Type
+            </div>
             <Select options={typeOptions} onSelect={handleTypeSelect} />
           </div>
-          <div className='flex relative items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-sm w-[250px]'>
-            <div className='absolute text-sm -top-4 bg-black px-1'>Genres</div>
+          <div
+            className={`flex relative items-center border-2 ${
+              darkMode ? "border-[#e9e7e7]" : "border-black"
+            } p-1 gap-1 cursor-pointer rounded-sm w-[250px]`}
+          >
+            <div
+              className={`absolute text-sm -top-4 ${
+                darkMode ? "bg-black" : "bg-white"
+              } px-1`}
+            >
+              Genres
+            </div>
             <CheckboxDropdown
               options={genresOptions}
               onSelectionChange={handleGenreChange}
             />
           </div>
-          <div className='flex relative items-center border-2 border-[#e9e7e7] p-1 gap-1 cursor-pointer rounded-sm w-[250px]'>
-            <div className='absolute text-sm -top-4 bg-black px-1'>Status</div>
+          <div
+            className={`flex relative items-center border-2 ${
+              darkMode ? "border-[#e9e7e7]" : "border-black"
+            } p-1 gap-1 cursor-pointer rounded-sm w-[250px]`}
+          >
+            <div
+              className={`absolute text-sm -top-4 ${
+                darkMode ? "bg-black" : "bg-[#ffffff]"
+              } px-1`}
+            >
+              Status
+            </div>
             <Select options={statusOptions} onSelect={handleStatusSelect} />
           </div>
           <div

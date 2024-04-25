@@ -6,6 +6,7 @@ import {
 } from "../../service.api.js/jikan.api";
 import Card from "../../components/Card";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const days = [
   "sunday",
   "monday",
@@ -20,6 +21,7 @@ export default function SchedulePage() {
   const [scroll, setScroll] = useState(0);
   const [schedules, setSchedules] = useState([]);
   const [selectBtn, setSelectBtn] = useState("Show All");
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   const handleBtnClick = async (day) => {
     setSelectBtn(day);
@@ -53,7 +55,9 @@ export default function SchedulePage() {
     fetchAnimes();
   }, []);
   return (
-    <div className='px-[100px] py-20'>
+    <div
+      className={`${darkMode ? "dark-mode" : "light-mode"} px-[100px] py-20`}
+    >
       <Navbar scroll={scroll} />
       <div className='flex flex-col gap-4'>
         <div>
@@ -70,7 +74,11 @@ export default function SchedulePage() {
         <div className='flex w-full flex-wrap gap-2'>
           <button
             className={`${
-              selectBtn === "Show All" ? "bg-main-red" : "bg-slate-900"
+              selectBtn === "Show All"
+                ? "bg-main-red"
+                : darkMode
+                ? "bg-slate-900"
+                : "bg-slate-600"
             } hover:bg-secondary-hover duration-500 px-3 py-1`}
             onClick={handleShowAll}
           >
@@ -81,7 +89,11 @@ export default function SchedulePage() {
             <button
               key={day}
               className={`${
-                selectBtn === day ? "bg-main-red" : "bg-slate-900"
+                selectBtn === day
+                  ? "bg-main-red"
+                  : darkMode
+                  ? "bg-slate-900"
+                  : "bg-slate-600"
               } hover:bg-secondary-hover duration-500 px-3 py-1 rounded-md`}
               onClick={() => handleBtnClick(day)}
             >

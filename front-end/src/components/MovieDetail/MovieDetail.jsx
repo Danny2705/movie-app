@@ -4,12 +4,14 @@ import {
   getAnimePictures,
   getAnimeStaff,
 } from "../../service.api.js/jikan.api";
-import { renderMovie } from "./renderMovie";
+import RenderMovie from "./renderMovie";
+import { useSelector } from "react-redux";
 
 const lists = ["Movie Detail", "Character", "Trailer", "Image", "Staff"];
 
 export default function MovieDetail({ info, selected, setSelected }) {
   const [detail, setDetail] = useState([]);
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   const handleBtnClick = async (id) => {
     if (id === "Character") {
@@ -28,13 +30,17 @@ export default function MovieDetail({ info, selected, setSelected }) {
   };
 
   return (
-    <div className='mt-4'>
+    <div className={`${darkMode ? "bg-black" : "bg-white"} mt-4`}>
       <div className='flex items-center gap-4 w-full'>
         {lists.map((list) => (
           <button
             key={list}
             className={`${
-              selected === list ? "bg-main-red" : "bg-slate-900"
+              selected === list
+                ? "bg-main-red"
+                : darkMode
+                ? "bg-slate-900"
+                : "bg-slate-500"
             } py-1 px-4`}
             onClick={() => handleBtnClick(list)}
           >
@@ -42,7 +48,7 @@ export default function MovieDetail({ info, selected, setSelected }) {
           </button>
         ))}
       </div>
-      {renderMovie(selected, info, detail)}
+      {RenderMovie(selected, info, detail)}
     </div>
   );
 }

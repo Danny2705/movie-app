@@ -1,10 +1,16 @@
+import { useSelector } from "react-redux";
 import Review from "../Review/Review";
 
-export const renderMovie = (selected, info, detail) => {
+const RenderMovie = (selected, info, detail) => {
+  const darkMode = useSelector((state) => state.theme.darkMode);
   if (selected === "Movie Detail") {
     return (
       <div>
-        <div className='w-full bg-[#0f1416] mt-4 p-4 px-10 flex max-w-[828px]:flex-col justify-between'>
+        <div
+          className={`${darkMode ? "text-white" : "text-black"} w-full ${
+            darkMode ? "bg-[#0f1416]" : "bg-[#ccc]"
+          } mt-4 p-4 px-10 flex max-w-[828px]:flex-col justify-between`}
+        >
           <div className='flex flex-col gap-3'>
             <h2 className='text-sm flex items-center gap-3'>
               <span>Episodes:</span>
@@ -127,7 +133,7 @@ export const renderMovie = (selected, info, detail) => {
     );
   } else if (selected === "Character" && detail) {
     return (
-      <div className=''>
+      <div className={`${darkMode ? "dark-mode" : "light-mode"}`}>
         <div className='flex max-h-[100vh] flex-wrap justify-between mt-4 gap-2 max-w-full'>
           {detail.map((character, i) => (
             <div key={i}>
@@ -150,7 +156,11 @@ export const renderMovie = (selected, info, detail) => {
     );
   } else if (selected === "Trailer") {
     return (
-      <div className='w-full bg-[#0f1416] mt-4 p-4 px-10 flex justify-between'>
+      <div
+        className={`w-full ${
+          darkMode ? "bg-[#0f1416]" : "bg-[#ccc]"
+        } mt-4 p-4 px-10 flex justify-between`}
+      >
         {info.trailer.embed_url === null ? (
           <div className='text-xl'>No Trailer</div>
         ) : (
@@ -205,3 +215,5 @@ export const renderMovie = (selected, info, detail) => {
     );
   }
 };
+
+export default RenderMovie;

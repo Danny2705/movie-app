@@ -56,6 +56,7 @@ const ReviewCard = ({ com, fetchComments, replies, parentId = null }) => {
   const [replyComment, setReplyComment] = useState("");
   const [editComment, setEditComment] = useState("");
   const user = useSelector((state) => state.auth.user);
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   const replyId = parentId ? parentId : com._id;
 
@@ -208,16 +209,14 @@ const ReviewCard = ({ com, fetchComments, replies, parentId = null }) => {
                   </span>
                 </button>
               )}
-              {/* {com.rating === null ? (
-                ""
-              ) : ( */}
+
               <button
                 onClick={handleClickReply}
                 className={`text-main-red text-[12px]`}
               >
                 Reply
               </button>
-              {/* )} */}
+
               <button
                 onClick={() => {
                   setIsEdit(!isEdit);
@@ -236,7 +235,11 @@ const ReviewCard = ({ com, fetchComments, replies, parentId = null }) => {
               <span className='text-[12px]'>
                 {com.likeAmount > 0 ? (
                   <div className='flex items-center gap-1'>
-                    <div className='rounded-full text-[10px] bg-blue-600'>
+                    <div
+                      className={`${
+                        darkMode ? "text-white" : "text-white"
+                      } rounded-full text-[10px] bg-blue-600`}
+                    >
                       <AiFillLike />
                     </div>
                     {com.likeAmount}

@@ -17,6 +17,7 @@ export default function Review() {
   const [childrenComment, setChildrenComment] = useState([]);
   const [rootComments, setRootComments] = useState([]);
   const user = useSelector((state) => state.auth.user);
+  const darkMode = useSelector((state) => state.theme.darkMode);
   const params = useParams();
   /*
   userId = user in redux
@@ -86,7 +87,11 @@ export default function Review() {
   };
 
   return (
-    <div className='mt-8 bg-main-black w-full min-h-[100vh] px-10 py-4 flex flex-col gap-6'>
+    <div
+      className={`mt-8 ${
+        darkMode ? "bg-main-black" : "bg-[#ccc]"
+      } w-full min-h-[100vh] px-10 py-4 flex flex-col gap-6`}
+    >
       <div className='flex items-center w-full justify-between border-b border-[grey] pb-4'>
         <h1 className='font-bold text-main-red text-lg'>
           {commentData?.length} Reviews

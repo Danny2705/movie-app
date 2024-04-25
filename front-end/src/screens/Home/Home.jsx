@@ -5,6 +5,7 @@ import VideoPlayer from "../../components/VideoPlayer";
 import { FaPlay } from "react-icons/fa";
 import SwiperImage from "../../components/SwiperImage";
 import Reveal from "../../components/Reveal";
+import { useSelector } from "react-redux";
 
 export default function Home({ scroll }) {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
@@ -13,6 +14,7 @@ export default function Home({ scroll }) {
     "../../assets/aot.jpg"
   );
   const [selectedMovie, setSelectedMovie] = useState(movieData[10]);
+  const darkMode = useSelector((state) => state.theme.darkMode);
 
   const openVideo = (videoSrc) => {
     setSelectedVideo(videoSrc);
@@ -34,7 +36,7 @@ export default function Home({ scroll }) {
 
   const embeddedUrl = selectedMovie.video.replace("watch?v=", "embed/");
   return (
-    <div className='home'>
+    <div className={`home ${darkMode ? "dark-mode" : "light-mode"}`}>
       <Navbar scroll={scroll} />
       <div className='movie'>
         <img
@@ -48,23 +50,23 @@ export default function Home({ scroll }) {
           </Reveal>
           <div className='flex items-center gap-2'>
             <Reveal>
-              <span className='border px-1'>{selectedMovie.year} </span>
+              <span className='txt border px-1'>{selectedMovie.year} </span>
             </Reveal>
             <Reveal>
-              <span className='border px-1 bg-[#DC143C]'>
+              <span className='txt border px-1 bg-[#DC143C]'>
                 {selectedMovie.ageLimit}{" "}
               </span>
             </Reveal>
             <Reveal>
-              <span className='border px-1'>{selectedMovie.length} </span>
+              <span className='txt border px-1'>{selectedMovie.length} </span>
             </Reveal>
             <Reveal>
-              <span className='border px-1'>{selectedMovie.category}</span>
+              <span className='txt border px-1'>{selectedMovie.category}</span>
             </Reveal>
           </div>
 
           <Reveal>
-            <p className='max-w-[500px] text-[grey] font-medium'>
+            <p className='desc max-w-[500px] text-[grey] font-medium'>
               {selectedMovie.description}
             </p>
           </Reveal>

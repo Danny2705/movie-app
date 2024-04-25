@@ -4,9 +4,12 @@ import Popular from "../../components/Popular/Popular";
 import Upcoming from "../../components/Upcoming/Upcoming";
 import Footer from "../../components/Footer/Footer";
 import BackToTopBtn from "../../components/Navbar/BackToTopBtn";
+import { useSelector } from "react-redux";
 
 export default function Layout() {
   const [scroll, setScroll] = useState(0);
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
   useEffect(() => {
     const handleScroll = () => {
       setScroll(window.scrollY);
@@ -18,6 +21,14 @@ export default function Layout() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const toggleLightMode = () => {
+      document.body.classList.toggle("light-mode", !darkMode);
+    };
+
+    toggleLightMode();
+  }, [darkMode]);
 
   return (
     <div className='relative'>
