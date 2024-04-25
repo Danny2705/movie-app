@@ -35,7 +35,7 @@ export default function Upcoming() {
             (movie, i) =>
               i < 15 && (
                 <div key={i} className='border max-w-[300px]'>
-                  <Card movie={movie} type='upcoming' />
+                  {<Card movie={movie} />}
                 </div>
               )
           )
