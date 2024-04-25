@@ -16,6 +16,14 @@ export default function UpcomingPage() {
   const darkMode = useSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
+    const toggleLightMode = () => {
+      document.body.classList.toggle("light-mode", !darkMode);
+    };
+
+    toggleLightMode();
+  }, [darkMode]);
+
+  useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY);
     });

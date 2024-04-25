@@ -20,6 +20,14 @@ export default function LibraryPage() {
   const darkMode = useSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
+    const toggleLightMode = () => {
+      document.body.classList.toggle("light-mode", !darkMode);
+    };
+
+    toggleLightMode();
+  }, [darkMode]);
+
+  useEffect(() => {
     // Check if the query parameter exists
     if (currentPage > 0) {
       // Modify the current route to include the query parameter

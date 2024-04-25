@@ -10,8 +10,15 @@ const WatchList = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
   console.log(user);
   const [scroll, setScroll] = useState(0);
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const toggleLightMode = () => {
+      document.body.classList.toggle("light-mode", !darkMode);
+    };
+
+    toggleLightMode();
+  }, [darkMode]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {

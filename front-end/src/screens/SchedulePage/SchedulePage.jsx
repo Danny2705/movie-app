@@ -23,6 +23,14 @@ export default function SchedulePage() {
   const [selectBtn, setSelectBtn] = useState("Show All");
   const darkMode = useSelector((state) => state.theme.darkMode);
 
+  useEffect(() => {
+    const toggleLightMode = () => {
+      document.body.classList.toggle("light-mode", !darkMode);
+    };
+
+    toggleLightMode();
+  }, [darkMode]);
+
   const handleBtnClick = async (day) => {
     setSelectBtn(day);
     const data = await getScheduleAnimeByDay(day);
