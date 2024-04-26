@@ -25,10 +25,29 @@ export const getAnimeInfo = async (id) => {
   }
 };
 
-export const searchAnime = async (name = "", page = 1) => {
+export const cosumetSearchAnime = async (name = "", page = 1) => {
   try {
     const { data } = await axios.get(url + name, { params: { page: page } });
-    console.log(url + "/" + name);
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const cosumetGetAnimeInfo = async (id) => {
+  try {
+    const { data } = await axios.get(url + 'info/' + id );
+
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const cosumetGetAnimeStream = async (id) => {
+  try {
+    const { data } = await axios.get(url + 'watch/' + id + `?server=vidstreaming` );
+
     return data;
   } catch (err) {
     throw new Error(err.message);

@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import SchedulePage from "./screens/SchedulePage/SchedulePage";
 import UpcomingPage from "./screens/UpcomingPage/UpcomingPage";
 import WatchList from "./screens/WatchList/WatchList";
+import WatchPage from "./screens/Watch/WatchPage";
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -33,6 +34,7 @@ function App() {
       />
       <Routes>
         <Route path='/' element={<Layout />} />
+        <Route path='/watch/:id' element={<WatchPage />} />
         <Route path='/search' element={<SearchPage />} />
         <Route path='/library' element={<Navigate to='/library/ShowAll' />} />
         <Route path='/library/:letter' element={<LibraryPage />} />
