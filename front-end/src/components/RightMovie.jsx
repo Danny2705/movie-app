@@ -58,7 +58,7 @@ export default function RightMovie({ id, setSelected }) {
             >
               <button
                 className={`flex items-start gap-3 mt-4 ${
-                  darkMode ? "bg-slate-800" : "bg-slate-600"
+                  darkMode ? "bg-slate-800" : "bg-slate-500"
                 } p-2 w-full`}
               >
                 <img
