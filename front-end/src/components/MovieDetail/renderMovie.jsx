@@ -55,7 +55,7 @@ const RenderMovie = (selected, info, detail) => {
             <p className='text-sm flex items-center gap-3'>
               <span>Themes:</span>
               <span className='text-main-red font-bold'>
-                {info.themes.length > 0 ? (
+                {info.themes?.length > 0 ? (
                   info.themes.map((theme, index) => (
                     <span key={index}>
                       {index !== 0 && ", "} {theme.name}
@@ -71,7 +71,7 @@ const RenderMovie = (selected, info, detail) => {
             <h2 className='text-sm flex items-start gap-3'>
               <span>Genres:</span>
               <span className='text-main-red font-bold'>
-                {info.genres.length > 0 ? (
+                {info.genres?.length > 0 ? (
                   info.genres.map((genre, index) => (
                     <span key={index}>
                       {index !== 0 && ", "} {genre.name}
@@ -105,7 +105,7 @@ const RenderMovie = (selected, info, detail) => {
             <p className='text-sm flex items-start gap-3'>
               <span>Studio:</span>
               <span className='text-main-red font-bold'>
-                {info.studios.length > 0 ? (
+                {info.studios?.length > 0 ? (
                   info.studios.map((studio, index) => (
                     <span key={index}>
                       {index !== 0 && ", "} {studio.name}

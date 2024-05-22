@@ -6,6 +6,7 @@ const initialState = {
   searchType: "",
   searchGenres: [],
   searchStatus: "",
+  animeInfo: {}
 };
 
 const contentSlice = createSlice({
@@ -27,6 +28,9 @@ const contentSlice = createSlice({
     setSearchStatus: (state, action) => {
       state.searchStatus = action.payload;
     },
+    setAnimeInfo: (state, action) => {
+      state.animeInfo = action.payload;
+    },
     clearSearch: (state) => {
       state.searchPrompt = "";
       state.searchType = "";
@@ -42,6 +46,7 @@ export const {
   setSearchType,
   setSearchGenre,
   setSearchStatus,
+  setAnimeInfo,
   clearSearch,
 } = contentSlice.actions;
 
