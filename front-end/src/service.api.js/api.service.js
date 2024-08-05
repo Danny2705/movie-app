@@ -2,7 +2,7 @@ import axios from "axios";
 
 const httpClient = axios.create({
   // baseURL: "http://localhost:5000/api",
-  baseURL: "movie-backend-lac.vercel.app/api",
+  baseURL: "https://movie-backend-lac.vercel.app/api",
 });
 
 export const signUp = async (user) => {
@@ -97,6 +97,7 @@ export const getComments = async (movie) => {
 };
 
 export const getCommentsByMovieId = async (movieId) => {
+  console.log(movieId)
   return await httpClient
     .get(`/review/${movieId}`)
     .then((response) => {
