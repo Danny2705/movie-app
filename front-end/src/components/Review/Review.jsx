@@ -56,12 +56,11 @@ export default function Review() {
   useEffect(() => {
     const sortData = () => {
       setRootComments(
-        commentData.filter((comment) => comment.parentReview === null)
+        commentData?.filter((comment) => comment.parentReview === null)
       );
 
       setChildrenComment(
-        commentData
-          .filter((cmt) => cmt.parentReview !== null)
+        commentData?.filter((cmt) => cmt.parentReview !== null)
           .sort((a, b) => {
             const nameA = a.createdAt;
             const nameB = b.createdAt;
@@ -139,7 +138,7 @@ export default function Review() {
       </div>
 
       <div>
-        {rootComments.length > 0 &&
+        {rootComments?.length > 0 &&
           rootComments
             .slice(0, visibleComments)
             .map((com) => (
@@ -151,7 +150,7 @@ export default function Review() {
               />
             ))}
 
-        {rootComments.length > visibleComments && (
+        {rootComments?.length > visibleComments && (
           <button
             onClick={handleShowMore}
             className='w-full bg-main-red py-2 mt-4 hover:bg-main-redHover'
