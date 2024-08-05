@@ -1,12 +1,12 @@
 import axios from "axios";
 
 //Default URL
-const url = "https://new-movie-phi.vercel.app/anime/gogoanime/";
+const url = "https://anime-host-sigma.vercel.app/anime/gogoanime/";
 
 export const fetchAnime = async () => {
   try {
     const { data } = await axios.get(
-      "https://new-movie-phi.vercel.app/anime/gogoanime/%20"
+      "https://anime-host-sigma.vercel.app/anime/gogoanime/%20"
     );
     return data;
   } catch (err) {
@@ -17,7 +17,7 @@ export const fetchAnime = async () => {
 export const getAnimeInfo = async (id) => {
   try {
     const { data } = await axios.get(
-      `https://new-movie-phi.vercel.app/anime/gogoanime/info/${id}`
+      `https://anime-host-sigma.vercel.app/anime/gogoanime/info/${id}`
     );
     return data;
   } catch (err) {

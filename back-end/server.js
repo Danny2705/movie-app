@@ -26,7 +26,9 @@ app.use("/api", reviewRoutes);
 
 //routes
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome" });
+  res.send('Hey this is my API running 🥳')
+  // res.json({ message: "Welcome" });
+
 });
 
 //listen to requests
