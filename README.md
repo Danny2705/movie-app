@@ -1,4 +1,4 @@
-# movie-app
+# Welcome to our Anime Application 😍😎
  
 Link to Our Application: https://movie-app-phi-beige.vercel.app/
 
@@ -20,6 +20,6 @@ Upcoming Movies: ![image](https://github.com/user-attachments/assets/02fe79e0-d8
 
 Schedule: ![image](https://github.com/user-attachments/assets/e0741fa3-cd9e-4d5a-bcf1-c0194c83cf9c)
 
-Light Mode: ![Uploading image.png…]()
+Light Mode: ![image](https://github.com/user-attachments/assets/50304b69-b237-4554-8352-d277bb94df95)
 
-Search Movie: ![Uploading image.png…]()
+Search Movie: ![image](https://github.com/user-attachments/assets/2bdca311-2d11-46f4-a386-4f1a6aad7e4a)
